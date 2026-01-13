@@ -25,7 +25,7 @@ const Hero = () => {
 
 
     return (
-        <div className="relative h-screen w-full overflow-hidden bg-black -mt-28">
+        <div className="relative h-screen w-full overflow-hidden bg-black">
             {/* Background Video */}
             <motion.div
                 className="absolute inset-0 z-0"
@@ -41,6 +41,7 @@ const Hero = () => {
                     muted
                     playsInline
                     className="w-full h-full object-cover object-center"
+                    style={{ minHeight: '100%', minWidth: '100%' }}
                 />
 
                 {/* Subtle Overlay for Text Contrast */}
@@ -48,16 +49,16 @@ const Hero = () => {
             </motion.div>
 
             {/* Content Overlay */}
-            <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-4">
+            <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-4 mt-28">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="max-w-6xl w-full flex flex-col items-center"
+                    className="max-w-5xl w-full flex flex-col items-center"
                 >
                     {/* Badge */}
-                    <motion.div variants={itemVariants} className="mb-6">
-                        <span className="bg-white/10 text-white border border-white/20 backdrop-blur-md px-6 py-2 rounded-full text-xs font-bold tracking-[0.25em] uppercase shadow-lg">
+                    <motion.div variants={itemVariants} className="mb-4">
+                        <span className="bg-white/10 text-white border border-white/20 backdrop-blur-md px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase shadow-lg">
                             ★ West Bengal's Premier Park
                         </span>
                     </motion.div>
@@ -65,10 +66,10 @@ const Hero = () => {
                     {/* Main Title */}
                     <motion.h1
                         variants={itemVariants}
-                        className="font-black text-white mb-8 uppercase leading-[0.9] drop-shadow-2xl"
+                        className="font-black text-white mb-5 uppercase leading-[0.85] drop-shadow-2xl"
                     >
-                        <span className="block text-4xl sm:text-6xl md:text-7xl tracking-tighter text-white mb-2">Unleash</span>
-                        <span className="block text-[4.5rem] sm:text-[7rem] md:text-[10rem] text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 filter drop-shadow-lg tracking-tighter">
+                        <span className="block text-3xl sm:text-5xl md:text-6xl tracking-tighter text-white mb-1">Unleash</span>
+                        <span className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 filter drop-shadow-lg tracking-tighter">
                             MADNESS
                         </span>
                     </motion.h1>
@@ -76,7 +77,7 @@ const Hero = () => {
                     {/* Subtitle */}
                     <motion.p
                         variants={itemVariants}
-                        className="text-white/90 text-sm md:text-xl font-medium leading-relaxed drop-shadow-md mb-10 max-w-2xl"
+                        className="text-white/90 text-sm md:text-lg font-medium leading-relaxed drop-shadow-md mb-8 max-w-2xl"
                     >
                         Embrace the adrenaline. Where every scream turns into a memory.
                     </motion.p>
@@ -89,7 +90,7 @@ const Hero = () => {
                     >
                         <Link
                             to="/book"
-                            className="bg-white text-black font-black py-4 px-10 rounded-full text-lg shadow-2xl flex items-center gap-3 hover:bg-gray-100 transition-colors"
+                            className="bg-white text-black font-black py-3 px-9 rounded-full text-base shadow-2xl flex items-center gap-3 hover:bg-gray-100 transition-colors"
                         >
                             GET TICKETS <div className="w-1.5 h-1.5 bg-black rounded-full"></div>
                         </Link>

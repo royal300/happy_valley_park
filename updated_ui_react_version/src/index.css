@@ -38,6 +38,16 @@
   .btn-hover {
     @apply transition-transform active:scale-95 hover:scale-105 duration-200 ease-out;
   }
+
+  /* Hide scrollbar for carousel */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Custom Scrollbar for Webkit */

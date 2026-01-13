@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import heroVideo from '../../assets/videos/hvp.mp4'; // Reusing existing video as placeholder
@@ -15,6 +15,29 @@ const reels = [
 
 const ReelsCarousel = () => {
     const scrollRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    // Autoplay carousel
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => {
+                const nextIndex = (prevIndex + 1) % reels.length;
+
+                // Scroll to the next reel
+                if (scrollRef.current) {
+                    const scrollAmount = nextIndex * 249; // 225px width + 24px gap
+                    scrollRef.current.scrollTo({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                }
+
+                return nextIndex;
+            });
+        }, 2000); // Change every 2 seconds (faster)
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <section className="py-20 bg-black text-white overflow-hidden">
@@ -28,8 +51,13 @@ const ReelsCarousel = () => {
             {/* Scroll Container */}
             <div
                 ref={scrollRef}
-                className="flex overflow-x-auto gap-6 px-4 md:px-8 pb-8 snap-x snap-mandatory scrollbar-hide"
-                style={{ scrollBehavior: 'smooth' }}
+                className="flex overflow-x-auto gap-6 px-4 md:px-8 pb-8 snap-x snap-mandatory"
+                style={{
+                    scrollBehavior: 'smooth',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                    WebkitOverflowScrolling: 'touch'
+                }}
             >
                 {reels.map((reel, idx) => (
                     <motion.div
@@ -37,7 +65,7 @@ const ReelsCarousel = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ delay: idx * 0.1 }}
-                        className="flex-shrink-0 w-[280px] h-[500px] relative rounded-3xl overflow-hidden snap-center group cursor-pointer border border-white/10"
+                        className="flex-shrink-0 w-[225px] h-[400px] relative rounded-3xl overflow-hidden snap-center group cursor-pointer border border-white/10"
                     >
                         {/* Video Layer */}
                         <video
@@ -46,8 +74,7 @@ const ReelsCarousel = () => {
                             loop
                             muted
                             playsInline
-                        // onMouseOver={e => e.target.play()}
-                        // onMouseOut={e => e.target.pause()}
+                            autoPlay
                         />
 
                         {/* Overlay */}
@@ -68,6 +95,28 @@ const ReelsCarousel = () => {
                             </p>
                         </div>
                     </motion.div>
+                ))}
+            </div>
+
+            {/* Carousel Indicators */}
+            <div className="flex justify-center gap-2 mt-6">
+                {reels.map((_, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => {
+                            setCurrentIndex(idx);
+                            if (scrollRef.current) {
+                                scrollRef.current.scrollTo({
+                                    left: idx * 249,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }}
+                        className={`h-2 rounded-full transition-all ${idx === currentIndex
+                            ? 'w-8 bg-gradient-to-r from-pink-500 to-purple-500'
+                            : 'w-2 bg-gray-600 hover:bg-gray-500'
+                            }`}
+                    />
                 ))}
             </div>
         </section>
