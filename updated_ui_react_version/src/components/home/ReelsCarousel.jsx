@@ -44,21 +44,21 @@ const ReelsCarousel = () => {
     }, []);
 
     return (
-        <section className="py-20 bg-[rgb(17,24,39)] overflow-hidden">
+        <section className="py-8 bg-black overflow-hidden">
 
-            <div className="max-w-7xl mx-auto px-4 mb-10">
-                <p className="text-yellow-500 font-black uppercase tracking-[0.3em] text-sm mb-4">
+            <div className="max-w-7xl mx-auto px-4 mb-6 text-center">
+                <p className="text-yellow-500 font-black uppercase tracking-[0.3em] text-base mb-2">
                     Attractions
                 </p>
-                <h2 className="text-4xl font-black uppercase tracking-tighter text-white">
-                    Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Fun</span>
+                <h2 className="text-5xl font-black uppercase tracking-tighter text-white">
+                    Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Reels</span>
                 </h2>
             </div>
 
             {/* Scroll Container */}
             <div
                 ref={scrollRef}
-                className="flex overflow-x-auto gap-6 px-4 md:px-8 pb-8 snap-x snap-mandatory"
+                className="flex overflow-x-auto gap-6 px-4 md:px-8 pb-4 snap-x snap-mandatory"
                 style={{
                     scrollBehavior: 'smooth',
                     scrollbarWidth: 'none',
@@ -94,28 +94,6 @@ const ReelsCarousel = () => {
                             </div>
                         </div>
                     </motion.div>
-                ))}
-            </div>
-
-            {/* Carousel Indicators */}
-            <div className="flex justify-center gap-2 mt-6">
-                {reels.map((_, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => {
-                            setCurrentIndex(idx);
-                            if (scrollRef.current) {
-                                scrollRef.current.scrollTo({
-                                    left: idx * 249,
-                                    behavior: 'smooth'
-                                });
-                            }
-                        }}
-                        className={`h-2 rounded-full transition-all ${idx === currentIndex
-                            ? 'w-8 bg-gradient-to-r from-pink-500 to-purple-500'
-                            : 'w-2 bg-gray-600 hover:bg-gray-500'
-                            }`}
-                    />
                 ))}
             </div>
         </section>

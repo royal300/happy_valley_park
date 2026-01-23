@@ -20,6 +20,7 @@ import splashImg from '../../assets/images/waterpark.jpg';
 import waveImg from '../../assets/images/wavepool.jpg';
 import resortImg from '../../assets/images/resort.jpg';
 import picnicImg from '../../assets/images/picnic_spot.jpg';
+import gardenImg from '../../assets/images/sitingpark.jpg';
 import waterSlideIcon from '../../assets/images/water-slide-icon.png';
 
 const attractionsData = {
@@ -41,17 +42,12 @@ const attractionsData = {
         { id: 13, title: 'Water Playground', image: splashImg },
         { id: 14, title: 'Children Pool', image: poolImg },
         { id: 15, title: 'Wave Pool', image: waveImg },
-    ],
-    others: [
-        { id: 16, title: 'Happy Valley Resort', image: resortImg },
-        { id: 17, title: 'Picnic Spot', image: picnicImg },
     ]
 };
 
 const categories = [
     { id: 'dry', name: 'Dry Park', icon: '🎢', type: 'emoji' },
-    { id: 'water', name: 'Water Park', icon: waterSlideIcon, type: 'image' },
-    { id: 'others', name: 'Others', icon: '🏖️', type: 'emoji' },
+    { id: 'water', name: 'Water Park', icon: waterSlideIcon, type: 'image' }
 ];
 
 const AttractionsPreview = () => {
@@ -106,7 +102,7 @@ const AttractionsPreview = () => {
     };
 
     return (
-        <div className="relative py-20 bg-white">
+        <div className="relative py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">

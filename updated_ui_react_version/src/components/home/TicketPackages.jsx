@@ -55,7 +55,7 @@ const packages = [
 
 const TicketPackages = () => {
     return (
-        <div className="relative -mt-28 z-20 px-4 mb-16 pointer-events-none">
+        <div className="relative -mt-28 z-20 px-4 mb-8 pointer-events-none">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pointer-events-auto">
                     {packages.map((pkg, idx) => (

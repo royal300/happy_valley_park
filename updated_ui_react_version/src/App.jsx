@@ -15,6 +15,10 @@ import WaterWorld from './pages/WaterWorld';
 import Terms from './pages/Terms';
 import RideDetails from './pages/RideDetails';
 
+import Resort from './pages/Resort';
+import PicnicSpot from './pages/PicnicSpot';
+import Garden from './pages/Garden';
+
 const App = () => {
   return (
     <Routes>
@@ -34,6 +38,9 @@ const App = () => {
         <Route path="/waterworld" element={<WaterWorld />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/ride/:id" element={<RideDetails />} />
+        <Route path="/resort" element={<Resort />} />
+        <Route path="/picnic-spot" element={<PicnicSpot />} />
+        <Route path="/garden" element={<Garden />} />
       </Route>
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />} />

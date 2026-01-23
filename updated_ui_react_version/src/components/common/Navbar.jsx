@@ -177,8 +177,8 @@ const Navbar = () => {
                                                     <button
                                                         onClick={() => toggleSubMenu(link.name)}
                                                         className={`w-full flex items-center justify-between p-4 rounded-xl text-lg font-bold transition-all duration-300 ${expandedMenu === link.name
-                                                                ? 'bg-wonderla-yellow/10 text-wonderla-yellow'
-                                                                : 'text-gray-900 hover:bg-gray-50'
+                                                            ? 'bg-wonderla-yellow/10 text-wonderla-yellow'
+                                                            : 'text-gray-900 hover:bg-gray-50'
                                                             }`}
                                                     >
                                                         <div className="flex items-center gap-3">
