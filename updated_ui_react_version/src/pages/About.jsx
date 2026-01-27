@@ -21,23 +21,20 @@ const About = () => {
                     className="prose lg:prose-xl mx-auto text-gray-500"
                 >
                     <p className="mb-6">
-                        Happy Valley Park is one of the best family parks in West Bengal. You can visit here with your family and friends.
-                        All kind of amazement and fun you can get here.
+                        Happy Valley Park is one of the leading family entertainment destinations in West Bengal, located at Bira. It offers a perfect mix of thrilling amusement rides, an exciting water park, peaceful green spaces, and comfortable hospitality. With attractions like the Frisbee, Carousel, Striking Car, 5D Show, water slides, and Wave Pool, the park promises fun for all age groups. Surrounded by lush gardens, picnic areas, a restaurant, and a resort, Happy Valley Park is ideal for day outings and relaxing getaways with family and friends.
                     </p>
                     <img
                         src={aboutImg}
                         alt="Park Overview"
                         className="w-full rounded-2xl shadow-xl mb-6"
                     />
+                    <h3 className="text-2xl font-bold text-gray-800 mt-8 mb-4">Our Mission</h3>
                     <p className="mb-6">
-                        Happy Valley Park presents to you the state-of-the-art theatre that takes you on a thrilling journey engaging all yours senses
-                        in a way that you have never imagined. Synchronized spectrum of visual effects, sophisticated motion ride system,
-                        special live environmental effects and high end surround sound systems generate a highly realistic experience.
-                        Immerse yourself in the movie magic instead of just watching them!
+                        Our mission is to create a safe and joyful space where children choose active play over screens, families spend quality time together, and every visitor enjoys real fun through entertainment and nature.
                     </p>
                     <h3 className="text-2xl font-bold text-gray-800 mt-8 mb-4">Our Vision</h3>
                     <p>
-                        To provide safe, hygienic, and world-class entertainment that creates lifelong memories for families and friends.
+                        Our vision is to become the most loved family park in West Bengal by delivering memorable experiences that combine fun, safety, greenery, and togetherness.
                     </p>
                 </motion.div>
             </div>
