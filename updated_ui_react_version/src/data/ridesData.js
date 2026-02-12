@@ -167,22 +167,7 @@ export const ridesData = [
         image: multiSlideImg,
         description: "Experience the thrill of multiple water slides with twists, turns, and splashes!"
     },
-    {
-        id: 'multi-slide-water-ride-1',
-        title: "Multi Slide Water Ride - Variant 1",
-        category: "Water",
-        type: "Water",
-        image: multiSlide1Img,
-        description: "Another exciting angle of our thrilling multi-slide water adventure!"
-    },
-    {
-        id: 'multi-slide-water-ride-2',
-        title: "Multi Slide Water Ride - Variant 2",
-        category: "Water",
-        type: "Water",
-        image: multiSlide2Img,
-        description: "More water slide fun with exciting twists and turns!"
-    },
+
     {
         id: 'children-water-park',
         title: "Children Water Park",
