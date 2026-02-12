@@ -118,8 +118,10 @@ const Hero = () => {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        <Link
-                            to="/book"
+                        <a
+                            href="https://happyvalley.royal300.com/client/dashboard"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-wonderla-yellow text-black font-extrabold px-10 py-4 rounded-full text-base sm:text-lg flex items-center gap-3 hover:bg-yellow-400 transition-all relative overflow-hidden"
                             style={{
                                 boxShadow: '0 0 30px rgba(251, 189, 8, 0.6), 0 0 60px rgba(251, 189, 8, 0.4), 0 0 80px rgba(255, 255, 255, 0.4), 0 0 100px rgba(255, 255, 255, 0.2), 0 4px 20px rgba(0,0,0,0.3)',
@@ -140,7 +142,7 @@ const Hero = () => {
                             />
                             <img src={ticketIcon} alt="Ticket" className="w-6 h-6 sm:w-7 sm:h-7 relative z-10" />
                             <span className="relative z-10">GET YOUR TICKETS</span>
-                        </Link>
+                        </a>
                     </motion.div>
                 </motion.div>
             </div>

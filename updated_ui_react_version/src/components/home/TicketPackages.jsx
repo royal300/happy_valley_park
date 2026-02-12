@@ -18,7 +18,7 @@ const packages = [
         discount: "20% OFF",
         price: "₹400",
         icon: Droplets,
-        link: "#"
+        link: "https://happyvalley.royal300.com/client/dashboard"
     },
     {
         id: 2,
@@ -29,7 +29,7 @@ const packages = [
         price: "₹600",
         icon: Ticket,
         featured: true,
-        link: "#"
+        link: "https://happyvalley.royal300.com/client/dashboard"
     },
     {
         id: 3,
@@ -39,7 +39,7 @@ const packages = [
         color: "from-orange-500 to-red-600",
         price: "₹200",
         icon: Zap,
-        link: "#"
+        link: "https://happyvalley.royal300.com/client/dashboard"
     },
     {
         id: 4,
@@ -49,7 +49,7 @@ const packages = [
         color: "from-blue-500 to-blue-700",
         price: "₹40",
         icon: DoorOpen,
-        link: "#"
+        link: "https://happyvalley.royal300.com/client/dashboard"
     }
 ];
 
@@ -59,8 +59,10 @@ const TicketPackages = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pointer-events-auto">
                     {packages.map((pkg, idx) => (
-                        <Link
-                            to={pkg.link}
+                        <a
+                            href={pkg.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             key={pkg.id}
                         >
                             <motion.div
@@ -140,7 +142,7 @@ const TicketPackages = () => {
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                 </div>
                             </motion.div>
-                        </Link>
+                        </a>
                     ))}
                 </div>
             </div>
