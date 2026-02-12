@@ -77,6 +77,7 @@ const TicketPackages = () => {
                                     <img
                                         src={pkg.image}
                                         alt={pkg.name}
+                                        loading="lazy"
                                         className="w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity duration-300"
                                     />
                                 </div>

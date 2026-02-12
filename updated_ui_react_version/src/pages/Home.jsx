@@ -59,7 +59,7 @@ const Home = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {/* Feature 1 - Resort */}
                             <Link to="/resort" className="group relative overflow-hidden rounded-2xl h-80 block shadow-xl transition-transform hover:-translate-y-2">
-                                <img src={resortImg} alt="Luxury Resort" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                <img src={resortImg} alt="Luxury Resort" loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 text-black px-6 py-2.5 rounded-full text-sm font-black shadow-2xl z-10 animate-pulse-slow border-2 border-yellow-500">
                                     <span className="drop-shadow-md">Room Start From 1500/-</span>
                                 </div>
@@ -71,7 +71,7 @@ const Home = () => {
 
                             {/* Feature 2 - Picnic */}
                             <Link to="/picnic-spot" className="group relative overflow-hidden rounded-2xl h-80 block shadow-xl transition-transform hover:-translate-y-2">
-                                <img src={picnicImg} alt="Picnic Spot" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                <img src={picnicImg} alt="Picnic Spot" loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 <div className="absolute top-4 right-4 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white px-6 py-2.5 rounded-full text-sm font-black shadow-2xl z-10 animate-pulse-slow border-2 border-red-400">
                                     <span className="drop-shadow-md">Book 1500/-</span>
                                 </div>
@@ -83,7 +83,7 @@ const Home = () => {
 
                             {/* Feature 3 - Garden */}
                             <Link to="/garden" className="group relative overflow-hidden rounded-2xl h-80 block shadow-xl transition-transform hover:-translate-y-2">
-                                <img src={sittingImg} alt="Sitting Park" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                <img src={sittingImg} alt="Sitting Park" loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/90 to-transparent w-full">
                                     <h3 className="text-2xl font-bold mb-1 text-white">Relaxation Gardens</h3>
                                     <p className="text-sm text-gray-300">Unwind in nature</p>

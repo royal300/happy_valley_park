@@ -1,50 +1,60 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Attractions from './pages/Attractions';
-import Gallery from './pages/Gallery';
-import Contact from './pages/Contact';
-import Booking from './pages/Booking';
-import AdminLogin from './pages/AdminLogin';
-import UserLogin from './pages/UserLogin';
-import AdminDashboard from './pages/AdminDashboard';
-import UserDashboard from './pages/UserDashboard';
-import WaterWorld from './pages/WaterWorld';
-import Terms from './pages/Terms';
-import PrivacyPolicy from './pages/PrivacyPolicy';
 
-import Resort from './pages/Resort';
-import PicnicSpot from './pages/PicnicSpot';
-import Garden from './pages/Garden';
+// Lazy Load Pages
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Attractions = lazy(() => import('./pages/Attractions'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Booking = lazy(() => import('./pages/Booking'));
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const UserLogin = lazy(() => import('./pages/UserLogin'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const UserDashboard = lazy(() => import('./pages/UserDashboard'));
+const WaterWorld = lazy(() => import('./pages/WaterWorld'));
+const Terms = lazy(() => import('./pages/Terms'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Resort = lazy(() => import('./pages/Resort'));
+const PicnicSpot = lazy(() => import('./pages/PicnicSpot'));
+const Garden = lazy(() => import('./pages/Garden'));
+
+// Loading Fallback Component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen bg-white">
+    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-yellow-500"></div>
+  </div>
+);
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="book" element={<Booking />} />
-        <Route path="about" element={<About />} />
-        <Route path="attractions" element={<Attractions />} />
-        <Route path="gallery" element={<Gallery />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="park" element={<Home />} />
-        <Route path="offers" element={<Home />} />
-        <Route path="events" element={<Home />} />
-        <Route path="/register" element={<UserLogin isRegister={true} />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        {/* New Content Pages */}
-        <Route path="/waterworld" element={<WaterWorld />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/resort" element={<Resort />} />
-        <Route path="/picnic-spot" element={<PicnicSpot />} />
-        <Route path="/garden" element={<Garden />} />
-      </Route>
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-    </Routes>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="book" element={<Booking />} />
+          <Route path="about" element={<About />} />
+          <Route path="attractions" element={<Attractions />} />
+          <Route path="gallery" element={<Gallery />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="park" element={<Home />} />
+          <Route path="offers" element={<Home />} />
+          <Route path="events" element={<Home />} />
+          <Route path="/register" element={<UserLogin isRegister={true} />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
+          {/* New Content Pages */}
+          <Route path="/waterworld" element={<WaterWorld />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/resort" element={<Resort />} />
+          <Route path="/picnic-spot" element={<PicnicSpot />} />
+          <Route path="/garden" element={<Garden />} />
+        </Route>
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      </Routes>
+    </Suspense>
   );
 }
 

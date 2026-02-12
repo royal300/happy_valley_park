@@ -78,6 +78,32 @@ systemctl reload nginx
 
 ---
 
+## Step 4: Secure with HTTPS (SSL)
+
+To enable HTTPS for `fend.gohappyvalley.com`, run the following commands on your VPS:
+
+1.  **Install Certbot:**
+    ```bash
+    apt install -y certbot python3-certbot-nginx
+    ```
+
+2.  **Obtain and Install Certificate:**
+    ```bash
+    certbot --nginx -d fend.gohappyvalley.com
+    ```
+
+    - Enter your email when asked.
+    - Agree to terms (`A`).
+    - Choose whether to share email (`Y` or `N`).
+    - Certbot will automatically update your Nginx configuration.
+
+3.  **Verify Auto-Renewal:**
+    ```bash
+    systemctl status certbot.timer
+    ```
+
+---
+
 ## Step 2: Automated Deployment
 
 The `deploy.sh` script is configured to update the site in `/var/www/happyvalley_frontend`.

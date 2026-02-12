@@ -17,6 +17,48 @@ const reels = [
     { id: 6, video: video1 }, // Repeating for carousel length
 ];
 
+const LazyVideo = ({ src, poster }) => {
+    const videoRef = useRef(null);
+    const [isInView, setIsInView] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsInView(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.2 } // Trigger when 20% visible
+        );
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <div ref={videoRef} className="w-full h-full bg-black">
+            {isInView ? (
+                <video
+                    src={src}
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                    loop
+                    muted
+                    playsInline
+                    autoPlay
+                />
+            ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gray-900">
+                    <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                </div>
+            )}
+        </div>
+    );
+};
+
 const ReelsCarousel = () => {
     const scrollRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -75,20 +117,13 @@ const ReelsCarousel = () => {
                         className="flex-shrink-0 w-[225px] h-[400px] relative rounded-3xl overflow-hidden snap-center group cursor-pointer border border-white/10"
                     >
                         {/* Video Layer */}
-                        <video
-                            src={reel.video}
-                            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                            loop
-                            muted
-                            playsInline
-                            autoPlay
-                        />
+                        <LazyVideo src={reel.video} />
 
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all"></div>
 
                         {/* Play Icon */}
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                             <div className="bg-white/20 backdrop-blur-md p-4 rounded-full">
                                 <Play fill="white" className="text-white w-8 h-8" />
                             </div>
