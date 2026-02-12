@@ -13,7 +13,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import UserDashboard from './pages/UserDashboard';
 import WaterWorld from './pages/WaterWorld';
 import Terms from './pages/Terms';
-import RideDetails from './pages/RideDetails';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import Resort from './pages/Resort';
 import PicnicSpot from './pages/PicnicSpot';
@@ -37,7 +37,7 @@ const App = () => {
         {/* New Content Pages */}
         <Route path="/waterworld" element={<WaterWorld />} />
         <Route path="/terms" element={<Terms />} />
-        <Route path="/ride/:id" element={<RideDetails />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/resort" element={<Resort />} />
         <Route path="/picnic-spot" element={<PicnicSpot />} />
         <Route path="/garden" element={<Garden />} />

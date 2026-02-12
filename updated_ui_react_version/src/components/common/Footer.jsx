@@ -32,14 +32,24 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-bold mb-6 text-white">Quick Links</h4>
                         <ul className="space-y-4">
-                            {['About Us', 'Attractions', 'Water World'].map((item) => (
-                                <li key={item}>
-                                    <Link to={`/${item.toLowerCase().replace(' ', '')}`} className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
-                                        <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
-                                        {item}
-                                    </Link>
-                                </li>
-                            ))}
+                            <li>
+                                <Link to="/about" className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
+                                    <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
+                                    About Us
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/attractions" className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
+                                    <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
+                                    Attractions
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/waterworld" className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
+                                    <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
+                                    Water World
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
@@ -47,14 +57,24 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-bold mb-6 text-white">Park Info</h4>
                         <ul className="space-y-4">
-                            {['Privacy Policy', 'Terms & Conditions', 'Park Map'].map((item) => (
-                                <li key={item}>
-                                    <Link to="/terms" className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
-                                        <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
-                                        {item}
-                                    </Link>
-                                </li>
-                            ))}
+                            <li>
+                                <Link to="/privacy-policy" className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
+                                    <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
+                                    Privacy Policy
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/terms" className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
+                                    <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
+                                    Terms & Conditions
+                                </Link>
+                            </li>
+                            <li>
+                                <a href="https://google.com/maps/place/Happy+Valley+Park/@22.774218,88.59315,16z/data=!4m5!3m4!1s0x0:0x23a7e7a2ea394fc8!8m2!3d22.7742183!4d88.59315?hl=en-US" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-wonderla-yellow transition-colors flex items-center gap-2 text-sm group">
+                                    <ChevronRight size={14} className="text-gray-600 group-hover:text-wonderla-yellow transition-colors" />
+                                    Park Map
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
@@ -66,7 +86,7 @@ const Footer = () => {
                                 <div className="bg-white/5 p-3 rounded-lg group-hover:bg-wonderla-yellow/20 transition-colors">
                                     <MapPin className="text-wonderla-yellow" size={20} />
                                 </div>
-                                <p className="leading-relaxed">Bira Badar Road,<br />Barasat, India, 743234</p>
+                                <p className="leading-relaxed">Bira, Badar Road, Rautara,<br />Kol-743234, North 24 Pgs,<br />WB, India</p>
                             </div>
                             <div className="flex items-center gap-4 group">
                                 <div className="bg-white/5 p-3 rounded-lg group-hover:bg-wonderla-yellow/20 transition-colors">

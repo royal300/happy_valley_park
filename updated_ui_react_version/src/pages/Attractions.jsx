@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { ridesData } from '../data/ridesData';
-import hauntedImg from '../assets/images/hauntedhouse.jpg';
+import show5DImg from '../assets/Dry Park/5D Show.jpg';
 
 const Attractions = () => {
     const [filter, setFilter] = useState('All');
@@ -56,9 +55,9 @@ const Attractions = () => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.3 }}
-                                className="bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden relative h-80"
+                                className="bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden relative h-80 group cursor-pointer"
                             >
-                                <Link to={`/ride/${attr.id}`} className="block h-full w-full group">
+                                <div className="block h-full w-full">
                                     <div className="absolute top-4 left-4 z-20">
                                         <span className="bg-white/90 backdrop-blur text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
                                             {attr.category}
@@ -79,7 +78,7 @@ const Attractions = () => {
                                             {attr.description}
                                         </p>
                                     </div>
-                                </Link>
+                                </div>
                             </motion.div>
                         ))}
                     </AnimatePresence>
@@ -89,7 +88,7 @@ const Attractions = () => {
                 <ScrollReveal>
                     <div className="mt-24 rounded-3xl overflow-hidden shadow-2xl relative h-[500px] flex items-center justify-center group">
                         <div className="absolute inset-0">
-                            <img src={hauntedImg} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Theatre BG" />
+                            <img src={show5DImg} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="5D Show" />
                             <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors"></div>
                         </div>
 
@@ -98,12 +97,9 @@ const Attractions = () => {
                             <h2 className="text-4xl md:text-7xl font-black text-white mb-8 leading-tight">
                                 5D THEATRE <br /> EXPERIENCE
                             </h2>
-                            <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+                            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
                                 Synchronized visual effects, sophisticated motion rides, and environmental effects generate a highly realistic experience.
                             </p>
-                            <button className="bg-red-600 px-10 py-4 rounded-full font-black text-white hover:bg-red-700 transition-all hover:scale-105 shadow-xl shadow-red-600/30">
-                                WATCH TRAILER
-                            </button>
                         </div>
                     </div>
                 </ScrollReveal>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { ridesData } from '../data/ridesData';
-import heroImg from '../assets/images/waterworld.jpg';
+import heroImg from '../assets/Water Park/Multi Slide Water Ride.JPG';
 
 const WaterWorld = () => {
     // Filter only Water Park rides
@@ -54,7 +53,7 @@ const WaterWorld = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     {waterRides.map((item, index) => (
                         <ScrollReveal key={item.id} delay={index * 0.1}>
-                            <Link to={`/ride/${item.id}`} className="block group relative overflow-hidden rounded-2xl shadow-xl h-80">
+                            <div className="block group relative overflow-hidden rounded-2xl shadow-xl h-80 cursor-pointer">
                                 <img
                                     src={item.image}
                                     alt={item.title}
@@ -64,11 +63,8 @@ const WaterWorld = () => {
                                 <div className="absolute bottom-0 left-0 p-8 text-white w-full">
                                     <h3 className="text-2xl font-bold mb-2 group-hover:text-wonderla-yellow transition-colors">{item.title}</h3>
                                     <p className="text-gray-200 line-clamp-2">{item.description}</p>
-                                    <span className="inline-block mt-4 text-sm font-bold uppercase tracking-widest text-wonderla-blue bg-white/10 backdrop-blur px-4 py-2 rounded-full group-hover:bg-white group-hover:text-blue-600 transition-all">
-                                        View Details
-                                    </span>
                                 </div>
-                            </Link>
+                            </div>
                         </ScrollReveal>
                     ))}
                 </div>

@@ -16,7 +16,7 @@ const Contact = () => {
                                 <MapPin className="text-wonderla-yellow w-8 h-8" />
                                 <div>
                                     <h4 className="font-bold text-gray-900">Address</h4>
-                                    <p className="text-gray-500">Bira Badar Road, Barasat, India, 743234</p>
+                                    <p className="text-gray-500">Bira, Badar Road, Rautara,<br />Kol-743234, North 24 Pgs, WB, India</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
@@ -39,7 +39,7 @@ const Contact = () => {
                     {/* Map Placeholder */}
                     <div className="bg-gray-200 rounded-2xl overflow-hidden h-96">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.4567890123!2d88.593187!3d22.774023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8a4e22ecb31d3%3A0x23a7e7a2ea394fc8!2sHappy%20Valley%20Park!5e0!3m2!1sen-GB!2sin!4v1634567890123!5m2!1sen-GB!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.4567890123!2d88.59315!3d22.774218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x23a7e7a2ea394fc8!2sHappy%20Valley%20Park!5e0!3m2!1sen-US!2sin!4v1634567890123!5m2!1sen-US!2sin"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}

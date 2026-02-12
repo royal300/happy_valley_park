@@ -2,22 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Import images
-import frisbeeImg from '../../assets/images/frisbee_ride.jpg';
-import carouselImg from '../../assets/images/flyingcarousel.jpg';
-import horseImg from '../../assets/images/horseride.jpg';
-import trainImg from '../../assets/images/toytrain.jpg';
-import jumpImg from '../../assets/images/jumping-house.jpg';
-import poolImg from '../../assets/images/waterpool.jpg';
-import carImg from '../../assets/images/striking_car.jpg';
-import boatImg from '../../assets/images/boating.jpg';
-import mickeyImg from '../../assets/images/mickeymouse.jpg';
-import hauntedImg from '../../assets/images/hauntedhouse.jpg';
-import gameZoneImg from '../../assets/images/gamezone.jpg';
-import beesImg from '../../assets/images/bees-round.jpg';
-import happyBeesImg from '../../assets/images/happybees.jpg';
-import splashImg from '../../assets/images/waterpark.jpg';
-import waveImg from '../../assets/images/wavepool.jpg';
+// Dry Park Images
+import frisbeeImg from '../../assets/Dry Park/Frisbee.jpg';
+import bullRideImg from '../../assets/Dry Park/Bull Ride.jpg';
+import bumpingCarImg from '../../assets/Dry Park/Bumping Car.JPG';
+import merryGoRoundImg from '../../assets/Dry Park/Merry Go Round.jpg';
+import horseImg from '../../assets/Dry Park/Horse Ride.jpg';
+import cricketMissionImg from '../../assets/Dry Park/ Cricket Mission.jpg';
+import boatImg from '../../assets/Dry Park/Boating.jpg';
+import toyTrainImg from '../../assets/Dry Park/Toy Train.jpg';
+import dragonTrainImg from '../../assets/Dry Park/Dragon Train.jpg';
+import jumpingMickeyImg from '../../assets/Dry Park/Jumping Mickey.jpg';
+import trampolinImg from '../../assets/Dry Park/Trampolin.JPG';
+import carouselImg from '../../assets/Dry Park/Child Flying Carousel.jpg';
+import gameZoneImg from '../../assets/Dry Park/Game Zone.JPG';
+import hauntedHouseImg from '../../assets/Dry Park/Haunted House.JPG';
+import show5DImg from '../../assets/Dry Park/5D Show.jpg';
+
+// Water Park Images
+import multiSlideImg from '../../assets/Water Park/Multi Slide Water Ride.JPG';
+import multiSlide1Img from '../../assets/Water Park/Multi Slide Water Ride (1).JPG';
+import multiSlide2Img from '../../assets/Water Park/Multi Slide Water Ride .JPG';
+import childrenWaterParkImg from '../../assets/Water Park/Children Water Park .JPG';
+import childrenWaterPark1Img from '../../assets/Water Park/Children Water Park (1).JPG';
+import waterWaveImg from '../../assets/Water Park/Water Wave .JPG';
+import waterWave1Img from '../../assets/Water Park/Water Wave (1).JPG';
+import waterCaveImg from '../../assets/Water Park/Water Cave .JPG';
+import danceFloorImg from '../../assets/Water Park/Dance Floor.jpg';
+import poolSideImg from '../../assets/Water Park/Pool Side.jpg';
+
+// Other Images
 import resortImg from '../../assets/images/resort.jpg';
 import picnicImg from '../../assets/images/picnic_spot.jpg';
 import gardenImg from '../../assets/images/sitingpark.jpg';
@@ -25,33 +39,43 @@ import waterSlideIcon from '../../assets/images/water-slide-icon.png';
 
 const attractionsData = {
     dry: [
-        { id: 1, title: 'Frisbee Ride', image: frisbeeImg },
-        { id: 2, title: 'Haunted House', image: hauntedImg },
-        { id: 3, title: 'Game Zone', image: gameZoneImg },
-        { id: 4, title: 'Toy Train', image: trainImg },
-        { id: 5, title: 'Striking Car', image: carImg },
-        { id: 6, title: 'Lake Boating', image: boatImg },
-        { id: 7, title: 'Flying Carousel', image: carouselImg },
-        { id: 8, title: 'Mickey Mouse', image: mickeyImg },
-        { id: 9, title: 'Jumping House', image: jumpImg },
-        { id: 10, title: 'Horse Ride', image: horseImg },
-        { id: 11, title: 'Bees Round', image: beesImg },
-        { id: 12, title: 'Happy Bees', image: happyBeesImg },
+        { id: 1, title: 'Frisbee', image: frisbeeImg },
+        { id: 2, title: 'Bull Ride', image: bullRideImg },
+        { id: 3, title: 'Bumping Car', image: bumpingCarImg },
+        { id: 4, title: 'Merry Go Round', image: merryGoRoundImg },
+        { id: 5, title: 'Horse Ride', image: horseImg },
+        { id: 6, title: 'Cricket Mission', image: cricketMissionImg },
+        { id: 7, title: 'Boating', image: boatImg },
+        { id: 8, title: 'Toy Train', image: toyTrainImg },
+        { id: 9, title: 'Dragon Train', image: dragonTrainImg },
+        { id: 10, title: 'Jumping Mickey', image: jumpingMickeyImg },
+        { id: 11, title: 'Trampolin', image: trampolinImg },
+        { id: 12, title: 'Flying Carousel', image: carouselImg },
+        { id: 13, title: 'Game Zone', image: gameZoneImg },
+        { id: 14, title: 'Haunted House', image: hauntedHouseImg },
+        { id: 15, title: '5D Show', image: show5DImg },
     ],
     water: [
-        { id: 13, title: 'Water Playground', image: splashImg },
-        { id: 14, title: 'Children Pool', image: poolImg },
-        { id: 15, title: 'Wave Pool', image: waveImg },
+        { id: 16, title: 'Multi Slide Water Ride', image: multiSlideImg },
+        { id: 17, title: 'Multi Slide - Variant 1', image: multiSlide1Img },
+        { id: 18, title: 'Multi Slide - Variant 2', image: multiSlide2Img },
+        { id: 19, title: 'Children Water Park', image: childrenWaterParkImg },
+        { id: 20, title: 'Children Play Area', image: childrenWaterPark1Img },
+        { id: 21, title: 'Water Wave Pool', image: waterWaveImg },
+        { id: 22, title: 'Wave Pool Beach Zone', image: waterWave1Img },
+        { id: 23, title: 'Water Cave', image: waterCaveImg },
+        { id: 24, title: 'Dance Floor', image: danceFloorImg },
+        { id: 25, title: 'Pool Side Relaxation', image: poolSideImg },
     ]
 };
 
 const categories = [
-    { id: 'dry', name: 'Dry Park', icon: '🎢', type: 'emoji' },
-    { id: 'water', name: 'Water Park', icon: waterSlideIcon, type: 'image' }
+    { id: 'water', name: 'Water Park', icon: waterSlideIcon, type: 'image' },
+    { id: 'dry', name: 'Dry Park', icon: '🎢', type: 'emoji' }
 ];
 
 const AttractionsPreview = () => {
-    const [activeCategory, setActiveCategory] = useState('dry');
+    const [activeCategory, setActiveCategory] = useState('water');
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(1);
 

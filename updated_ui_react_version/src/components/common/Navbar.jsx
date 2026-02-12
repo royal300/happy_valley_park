@@ -37,7 +37,10 @@ const Navbar = () => {
             icon: Zap,
             subItems: [
                 { name: 'Dry Park', path: '/attractions' },
-                { name: 'Water Park', path: '/waterworld' }
+                { name: 'Water Park', path: '/waterworld' },
+                { name: 'Garden', path: '/garden' },
+                { name: 'Resort', path: '/resort' },
+                { name: 'Picnic Spot', path: '/picnic-spot' }
             ]
         },
         { name: 'About', path: '/about', icon: Info },
