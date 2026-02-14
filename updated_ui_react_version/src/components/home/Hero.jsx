@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Ticket } from 'lucide-react';
-import heroVideo from '../../assets/videos/hvp.mp4';
-import heroBg from '../../assets/images/happyvalleygate.jpg';
+import heroVideo from '../../assets/videos/hvp_hero.mp4';
 import ticketIcon from '../../assets/images/ticket-icon.png';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +31,6 @@ const Hero = () => {
             <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
                 <video
                     src={heroVideo}
-                    poster={heroBg}
                     autoPlay
                     loop
                     muted
