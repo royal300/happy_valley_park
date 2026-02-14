@@ -43,10 +43,15 @@ function scanCodebase() {
 
     const unusedFiles = [];
 
-    // Read all code content into memory (for smaller projects effective enough)
+    // Read all code content into memory and STRIP COMMENTS
     let allCodeContent = '';
     codeFiles.forEach(file => {
-        allCodeContent += fs.readFileSync(file, 'utf8') + '\n';
+        let content = fs.readFileSync(file, 'utf8');
+        // Remove single line comments
+        content = content.replace(/\/\/.*$/gm, '');
+        // Remove multi-line comments
+        content = content.replace(/\/\*[\s\S]*?\*\//g, '');
+        allCodeContent += content + '\n';
     });
 
     // Check index.html too
@@ -54,6 +59,18 @@ function scanCodebase() {
         const indexHtml = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
         allCodeContent += indexHtml;
     } catch (e) { }
+
+    // Also scan public folder for media
+    const PUBLIC_DIR = path.join(__dirname, '../public');
+    const publicMedia = getFiles(PUBLIC_DIR, MEDIA_EXTENSIONS);
+
+    // Scan public files usage
+    publicMedia.forEach(mediaFile => {
+        const filename = path.basename(mediaFile);
+        if (!allCodeContent.includes(filename)) {
+            unusedFiles.push(mediaFile);
+        }
+    });
 
 
     mediaFiles.forEach(mediaFile => {
