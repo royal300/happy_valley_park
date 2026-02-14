@@ -15,9 +15,10 @@ async function rotateImage() {
     }
 
     try {
-        console.log('🔄 Rotating image:', IMAGE_PATH);
+        console.log('🔄 Rotating image 180 degrees:', IMAGE_PATH);
+        // Using rotate(180) to flip it upside down (which should make it upright if currently upside down)
         const buffer = await sharp(IMAGE_PATH)
-            .rotate(90) // Rotate 90 degrees clockwise
+            .rotate(180)
             .toBuffer();
 
         fs.writeFileSync(IMAGE_PATH, buffer);
