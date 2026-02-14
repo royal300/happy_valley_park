@@ -14,8 +14,10 @@ ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 ffmpeg.setFfprobePath(ffprobeInstaller.path);
 
 const ASSETS_DIR = path.join(__dirname, '../src/assets');
-const MAX_IMAGE_WIDTH = 1280; // Reduced further to 1280 for better savings
-const VIDEO_CRF = 28;
+const MAX_IMAGE_WIDTH = 1024; // Reduced to 1024 for smaller files
+const IMAGE_QUALITY = 65; // More aggressive compression
+const VIDEO_CRF = 32; // Higher CRF = more compression
+const VIDEO_HEIGHT = 480; // Lower resolution for web
 
 // Helper to recursively get files
 function getFiles(dir) {
@@ -55,9 +57,9 @@ async function optimizeImage(filePath) {
         }
 
         if (ext === '.png') {
-            await pipeline.png({ quality: 80, compressionLevel: 9 }).toFile(tempPath);
+            await pipeline.png({ quality: IMAGE_QUALITY, compressionLevel: 9 }).toFile(tempPath);
         } else {
-            await pipeline.jpeg({ quality: 80, mozjpeg: true }).toFile(tempPath);
+            await pipeline.jpeg({ quality: IMAGE_QUALITY, mozjpeg: true }).toFile(tempPath);
         }
 
         const newSize = fs.statSync(tempPath).size;
@@ -94,7 +96,7 @@ function optimizeVideo(filePath) {
                 '-c:v libx264',
                 `-crf ${VIDEO_CRF}`,
                 '-preset slow',
-                '-vf scale=-2:720',
+                `-vf scale=-2:${VIDEO_HEIGHT}`,
                 '-c:a aac',
                 '-b:a 128k'
             ])
