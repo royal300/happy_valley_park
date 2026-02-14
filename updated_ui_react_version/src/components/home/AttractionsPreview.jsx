@@ -57,8 +57,8 @@ const attractionsData = {
     ],
     water: [
         { id: 16, title: 'Multi Slide Water Ride', image: multiSlideImg },
-        { id: 17, title: 'Multi Slide - Variant 1', image: multiSlide1Img },
-        { id: 18, title: 'Multi Slide - Variant 2', image: multiSlide2Img },
+        { id: 17, title: 'Multi Slide Water Ride', image: multiSlide1Img },
+        { id: 18, title: 'Multi Slide Water Ride', image: multiSlide2Img },
         { id: 19, title: 'Children Water Park', image: childrenWaterParkImg },
         { id: 20, title: 'Children Play Area', image: childrenWaterPark1Img },
         { id: 21, title: 'Water Wave Pool', image: waterWaveImg },
