@@ -9,7 +9,7 @@ import picnic3 from '../assets/Picnic Spot/DSC00421.JPG';
 import picnic4 from '../assets/Picnic Spot/DSC00423.JPG';
 import picnic5 from '../assets/Picnic Spot/DSC00425.JPG';
 import picnic6 from '../assets/Picnic Spot/DSC00428.JPG';
-import picnic7 from '../assets/Picnic Spot/DSC00529.JPG';
+
 import picnic8 from '../assets/Picnic Spot/IMG_2519.jpg';
 import picnic9 from '../assets/Picnic Spot/IMG_2521.jpg';
 import picnic10 from '../assets/Picnic Spot/IMG_2522.jpg';
@@ -22,7 +22,7 @@ const PicnicSpot = () => {
         { id: 4, image: picnic4 },
         { id: 5, image: picnic5 },
         { id: 6, image: picnic6 },
-        { id: 7, image: picnic7 },
+
         { id: 8, image: picnic8 },
         { id: 9, image: picnic9 },
         { id: 10, image: picnic10 },
