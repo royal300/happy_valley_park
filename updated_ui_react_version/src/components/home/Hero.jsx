@@ -139,7 +139,7 @@ const Hero = () => {
                                 }}
                             />
                             <img src={ticketIcon} alt="Ticket" className="w-6 h-6 sm:w-7 sm:h-7 relative z-10" />
-                            <span className="relative z-10">GET YOUR TICKETS</span>
+                            <span className="relative z-10">BOOK YOUR TICKETS</span>
                         </a>
                     </motion.div>
                 </motion.div>

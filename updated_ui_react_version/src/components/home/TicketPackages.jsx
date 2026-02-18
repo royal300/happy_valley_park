@@ -133,6 +133,16 @@ const TicketPackages = () => {
                                             </span>
                                         </div>
                                     </div>
+
+                                    {/* Book Ticket Button */}
+                                    <div className="mt-4">
+                                        <div className={`w-full py-2 bg-white rounded-lg text-center font-bold text-sm uppercase tracking-wide group-hover:scale-105 transition-transform duration-300 ${pkg.id === 1 ? 'text-cyan-600' :
+                                                pkg.id === 2 ? 'text-purple-600' :
+                                                    pkg.id === 3 ? 'text-orange-600' : 'text-blue-600'
+                                            }`}>
+                                            Book Ticket
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {/* Hover effect */}
