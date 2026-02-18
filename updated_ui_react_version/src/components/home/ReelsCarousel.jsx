@@ -1,20 +1,19 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
-import heroVideo from '../../assets/videos/hvp.mp4';
-import video1 from '../../assets/videos/HAPPY VALLEY (1).mp4';
-import video4 from '../../assets/videos/HAPPY VALLEY (4).mp4';
-import video5 from '../../assets/videos/HAPPY VALLEY (5).mp4';
-import videoMain from '../../assets/videos/HAPPY VALLEY .mp4';
+import reel1 from '../../assets/videos/hvp_reels1.mp4';
+import reel2 from '../../assets/videos/hvp_reels2.mp4';
+import reel3 from '../../assets/videos/hvp_reels3.mp4';
+import reel4 from '../../assets/videos/hvp_reels4.mp4';
+import reel5 from '../../assets/videos/hvp_reels5.mp4';
 
 // Mock Data for Reels
 const reels = [
-    { id: 1, video: video1 },
-    { id: 2, video: video4 },
-    { id: 3, video: video5 },
-    { id: 4, video: videoMain },
-    { id: 5, video: heroVideo },
-    { id: 6, video: video1 }, // Repeating for carousel length
+    { id: 1, video: reel1 },
+    { id: 2, video: reel2 },
+    { id: 3, video: reel3 },
+    { id: 4, video: reel4 },
+    { id: 5, video: reel5 },
 ];
 
 const LazyVideo = ({ src, poster }) => {
