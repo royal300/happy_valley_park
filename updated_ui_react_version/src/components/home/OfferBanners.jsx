@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion } from 'framer-motion';
 
 const OfferBanners = () => {
+    const [offers, setOffers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchOffers = async () => {
+            try {
+                const apiUrl = import.meta.env.PROD ? '/backend/api/offers.php' : 'http://localhost:8000/backend/api/offers.php';
+                const response = await axios.get(apiUrl);
+                if (Array.isArray(response.data) && response.data.length > 0) {
+                    setOffers(response.data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch offers');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchOffers();
+    }, []);
+
+    // Fallback to hardcoded images if no offers in DB
+    const fallbackOffers = [
+        { id: 'f1', title: 'Water Park Offer', image_url: '/water_park_poster_final.jpg' },
+        { id: 'f2', title: 'Dry Park Offer', image_url: '/dry_park_poster_final.jpg' },
+    ];
+
+    const displayOffers = offers.length > 0 ? offers : (loading ? [] : fallbackOffers);
+
+    if (loading) return null; // Don't flash content while loading
+
     return (
         <section className="container mx-auto px-4 py-12">
             <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
@@ -14,37 +45,22 @@ const OfferBanners = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                {/* Water World Offer */}
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="group relative w-full overflow-hidden rounded-2xl shadow-xl cursor-pointer"
-                >
-                    <img
-                        src="/water_park_poster_final.jpg"
-                        alt="Water World 20% OFF Offer"
-                        className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                </motion.div>
-
-                {/* Dry Park Offer */}
-                <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="group relative w-full overflow-hidden rounded-2xl shadow-xl cursor-pointer"
-                >
-                    <img
-                        src="/dry_park_poster_final.jpg"
-                        alt="Dry Park All Rides Combo Offer"
-                        className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                </motion.div>
-
+                {displayOffers.map((offer, index) => (
+                    <motion.div
+                        key={offer.id}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.2 }}
+                        className="group relative w-full overflow-hidden rounded-2xl shadow-xl cursor-pointer"
+                    >
+                        <img
+                            src={offer.image_url}
+                            alt={offer.title}
+                            className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </motion.div>
+                ))}
             </div>
         </section>
     );

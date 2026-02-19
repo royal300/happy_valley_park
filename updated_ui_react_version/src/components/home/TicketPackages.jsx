@@ -2,12 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Ticket, Droplets, Zap, DoorOpen } from 'lucide-react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import waterParkImg from '../../assets/images/water_park.png';
 import dryParkImg from '../../assets/images/dry_park.png';
 import comboParkImg from '../../assets/images/combo_park.png';
 import entryTicketImg from '../../assets/images/entry_ticket.png';
 
-const packages = [
+const defaultPackages = [
     {
         id: 1,
         name: "Water World Ticket",
@@ -53,12 +55,60 @@ const packages = [
     }
 ];
 
+// Icon helper
+const getIconForPackage = (pkg) => {
+    const name = (pkg.name || '').toLowerCase();
+    if (name.includes('water') && !name.includes('combo') && !name.includes('dry')) return Droplets;
+    if (name.includes('combo') || (name.includes('water') && name.includes('dry'))) return Ticket;
+    if (name.includes('dry')) return Zap;
+    return DoorOpen;
+};
+
+// Image helper
+const getFallbackImage = (pkg) => {
+    const name = (pkg.name || '').toLowerCase();
+    if (name.includes('water') && !name.includes('combo') && !name.includes('dry')) return waterParkImg;
+    if (name.includes('combo') || (name.includes('water') && name.includes('dry'))) return comboParkImg;
+    if (name.includes('dry')) return dryParkImg;
+    return entryTicketImg;
+};
+
 const TicketPackages = () => {
+    const [ticketPackages, setTicketPackages] = useState(defaultPackages);
+
+    useEffect(() => {
+        const fetchPackages = async () => {
+            try {
+                const apiUrl = import.meta.env.PROD ? '/backend/api/tickets.php' : 'http://localhost:8000/backend/api/tickets.php';
+                const response = await axios.get(apiUrl);
+                if (Array.isArray(response.data) && response.data.length > 0) {
+                    const mappedPackages = response.data.map(pkg => ({
+                        id: pkg.id,
+                        name: pkg.name || '',
+                        desc: pkg.description || '',  // DB uses 'description', component uses 'desc'
+                        image: pkg.image || getFallbackImage(pkg),
+                        color: pkg.color || 'from-blue-500 to-blue-700',
+                        originalPrice: pkg.original_price || '',  // DB uses 'original_price'
+                        discount: pkg.discount || '',
+                        price: pkg.price || '',
+                        icon: getIconForPackage(pkg),
+                        featured: pkg.featured == 1,
+                        link: pkg.link || 'https://happyvalley.royal300.com/client/dashboard',
+                    }));
+                    setTicketPackages(mappedPackages);
+                }
+            } catch (error) {
+                console.log('Using default packages');
+            }
+        };
+        fetchPackages();
+    }, []);
+
     return (
         <div className="relative -mt-28 z-20 px-4 mb-8 pointer-events-none">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pointer-events-auto">
-                    {packages.map((pkg, idx) => (
+                    {ticketPackages.map((pkg, idx) => (
                         <a
                             href={pkg.link}
                             target="_blank"
@@ -119,9 +169,11 @@ const TicketPackages = () => {
                                                 <span className="inline-block bg-red-500 text-white text-xs font-black px-2 py-1 rounded-md mr-2">
                                                     {pkg.discount}
                                                 </span>
-                                                <span className="text-white/70 text-sm line-through font-semibold">
-                                                    {pkg.originalPrice}
-                                                </span>
+                                                {pkg.originalPrice && (
+                                                    <span className="text-white/70 text-sm line-through font-semibold">
+                                                        {pkg.originalPrice}
+                                                    </span>
+                                                )}
                                             </div>
                                         )}
                                         <div className="flex items-baseline gap-2">
@@ -136,9 +188,11 @@ const TicketPackages = () => {
 
                                     {/* Book Ticket Button */}
                                     <div className="mt-4">
-                                        <div className={`w-full py-2 bg-white rounded-lg text-center font-bold text-sm uppercase tracking-wide group-hover:scale-105 transition-transform duration-300 ${pkg.id === 1 ? 'text-cyan-600' :
-                                                pkg.id === 2 ? 'text-purple-600' :
-                                                    pkg.id === 3 ? 'text-orange-600' : 'text-blue-600'
+                                        <div className={`w-full py-2 bg-white rounded-lg text-center font-bold text-sm uppercase tracking-wide group-hover:scale-105 transition-transform duration-300 ${pkg.color.includes('cyan') ? 'text-cyan-600' :
+                                                pkg.color.includes('purple') ? 'text-purple-600' :
+                                                    pkg.color.includes('orange') ? 'text-orange-600' :
+                                                        pkg.color.includes('green') ? 'text-green-600' :
+                                                            'text-blue-600'
                                             }`}>
                                             Book Ticket
                                         </div>

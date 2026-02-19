@@ -13,6 +13,8 @@ const AdminLogin = lazy(() => import('./pages/AdminLogin'));
 const UserLogin = lazy(() => import('./pages/UserLogin'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const UserDashboard = lazy(() => import('./pages/UserDashboard'));
+const FrontendAdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const FrontendAdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const WaterWorld = lazy(() => import('./pages/WaterWorld'));
 const Terms = lazy(() => import('./pages/Terms'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
@@ -53,6 +55,9 @@ const App = () => {
         </Route>
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        {/* Frontend Admin Routes */}
+        <Route path="/frontendadmin" element={<FrontendAdminLogin />} />
+        <Route path="/frontendadmin/dashboard" element={<FrontendAdminDashboard />} />
       </Routes>
     </Suspense>
   );

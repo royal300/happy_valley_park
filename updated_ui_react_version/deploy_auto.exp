@@ -7,11 +7,6 @@ set user "root"
 set password "Royal300@2026"
 set script "./deploy.sh"
 
-# Wait, the script *is* deploy.sh, but ssh uses password.
-# However, deploy.sh runs commands locally then shells out.
-# So I should spawn the ssh session directly? 
-# No, deploy.sh executes tasks. Let's just wrap deploy.sh execution.
-
 spawn $script
 
 expect {
@@ -21,7 +16,9 @@ expect {
     }
     "password:" {
         send "$password\r"
+        exp_continue
     }
+    eof
 }
 
-interact
+puts "\n🎉 Deployment finished!"
