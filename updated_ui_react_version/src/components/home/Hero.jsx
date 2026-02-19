@@ -4,26 +4,9 @@ import { Ticket } from 'lucide-react';
 import heroVideo from '../../assets/videos/hvp_banner.mp4';
 import ticketIcon from '../../assets/images/ticket-icon.png';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 const Hero = () => {
-    const [videoUrl, setVideoUrl] = useState(heroVideo);
 
-    useEffect(() => {
-        const fetchVideo = async () => {
-            try {
-                const apiUrl = import.meta.env.PROD ? '/backend/api/hero.php' : 'http://localhost:8000/backend/api/hero.php';
-                const response = await axios.get(apiUrl);
-                if (response.data.video_url) {
-                    setVideoUrl(response.data.video_url);
-                }
-            } catch (error) {
-                console.error('Failed to fetch hero video');
-            }
-        };
-        fetchVideo();
-    }, []);
     // Staggered Variants for Text
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -48,7 +31,7 @@ const Hero = () => {
             {/* Background Video - Full Screen Coverage */}
             <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
                 <video
-                    src={videoUrl}
+                    src={heroVideo}
                     autoPlay
                     loop
                     muted
