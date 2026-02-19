@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import aboutImg from '../assets/images/resort.jpg';
+import aboutImg from '../assets/images/resort.webp';
 
 const About = () => {
     return (

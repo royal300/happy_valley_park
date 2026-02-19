@@ -1,31 +1,31 @@
 // Dry Park Images
-import frisbeeImg from '../assets/Dry Park/Frisbee.jpg';
-import bullRideImg from '../assets/Dry Park/Bull Ride.jpg';
-import bumpingCarImg from '../assets/Dry Park/Bumping Car.JPG';
-import merryGoRoundImg from '../assets/Dry Park/Merry Go Round.jpg';
-import horseImg from '../assets/Dry Park/Horse Ride.jpg';
-import cricketMissionImg from '../assets/Dry Park/ Cricket Mission.jpg';
-import boatImg from '../assets/Dry Park/Boating.jpg';
-import toyTrainImg from '../assets/Dry Park/Toy Train.jpg';
-import dragonTrainImg from '../assets/Dry Park/Dragon Train.jpg';
-import jumpingMickeyImg from '../assets/Dry Park/Jumping Mickey.jpg';
-import trampolinImg from '../assets/Dry Park/Trampolin.JPG';
-import carouselImg from '../assets/Dry Park/Child Flying Carousel.jpg';
-import gameZoneImg from '../assets/Dry Park/Game Zone.JPG';
-import hauntedHouseImg from '../assets/Dry Park/Haunted House.JPG';
-import show5DImg from '../assets/Dry Park/5D Show.jpg';
+import frisbeeImg from '../assets/Dry Park/Frisbee.webp';
+import bullRideImg from '../assets/Dry Park/Bull Ride.webp';
+import bumpingCarImg from '../assets/Dry Park/Bumping Car.webp';
+import merryGoRoundImg from '../assets/Dry Park/Merry Go Round.webp';
+import horseImg from '../assets/Dry Park/Horse Ride.webp';
+import cricketMissionImg from '../assets/Dry Park/ Cricket Mission.webp';
+import boatImg from '../assets/Dry Park/Boating.webp';
+import toyTrainImg from '../assets/Dry Park/Toy Train.webp';
+import dragonTrainImg from '../assets/Dry Park/Dragon Train.webp';
+import jumpingMickeyImg from '../assets/Dry Park/Jumping Mickey.webp';
+import trampolinImg from '../assets/Dry Park/Trampolin.webp';
+import carouselImg from '../assets/Dry Park/Child Flying Carousel.webp';
+import gameZoneImg from '../assets/Dry Park/Game Zone.webp';
+import hauntedHouseImg from '../assets/Dry Park/Haunted House.webp';
+import show5DImg from '../assets/Dry Park/5D Show.webp';
 
 // Water Park Images
-import multiSlideImg from '../assets/Water Park/Multi Slide Water Ride.JPG';
-import multiSlide1Img from '../assets/Water Park/Multi Slide Water Ride (1).JPG';
-import multiSlide2Img from '../assets/Water Park/Multi Slide Water Ride .JPG';
-import childrenWaterParkImg from '../assets/Water Park/Children Water Park .JPG';
-import childrenWaterPark1Img from '../assets/Water Park/Children Water Park (1).JPG';
-import waterWaveImg from '../assets/Water Park/Water Wave .JPG';
-import waterWave1Img from '../assets/Water Park/Water Wave (1).JPG';
-import waterCaveImg from '../assets/Water Park/Water Cave .JPG';
-import danceFloorImg from '../assets/Water Park/Dance Floor.jpg';
-import poolSideImg from '../assets/Water Park/Pool Side.jpg';
+import multiSlideImg from '../assets/Water Park/Multi Slide Water Ride.webp';
+import multiSlide1Img from '../assets/Water Park/Multi Slide Water Ride (1).webp';
+import multiSlide2Img from '../assets/Water Park/Multi Slide Water Ride .webp';
+import childrenWaterParkImg from '../assets/Water Park/Children Water Park .webp';
+import childrenWaterPark1Img from '../assets/Water Park/Children Water Park (1).webp';
+import waterWaveImg from '../assets/Water Park/Water Wave .webp';
+import waterWave1Img from '../assets/Water Park/Water Wave (1).webp';
+import waterCaveImg from '../assets/Water Park/Water Cave .webp';
+import danceFloorImg from '../assets/Water Park/Dance Floor.webp';
+import poolSideImg from '../assets/Water Park/Pool Side.webp';
 
 export const ridesData = [
     // Dry Park Rides - Thrill Category
