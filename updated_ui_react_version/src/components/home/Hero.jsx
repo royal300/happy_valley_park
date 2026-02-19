@@ -118,7 +118,7 @@ const Hero = () => {
                         whileTap={{ scale: 0.95 }}
                     >
                         <a
-                            href="https://happyvalley.royal300.com/client/dashboard"
+                            href="https://happyvalley.royal300.com/client/book"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-wonderla-yellow text-black font-extrabold px-10 py-4 rounded-full text-base sm:text-lg flex items-center gap-3 hover:bg-yellow-400 transition-all relative overflow-hidden"

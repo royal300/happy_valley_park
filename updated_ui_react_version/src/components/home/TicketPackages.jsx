@@ -20,7 +20,7 @@ const defaultPackages = [
         discount: "20% OFF",
         price: "₹400",
         icon: Droplets,
-        link: "https://happyvalley.royal300.com/client/dashboard"
+        link: "https://happyvalley.royal300.com/client/book"
     },
     {
         id: 2,
@@ -31,7 +31,7 @@ const defaultPackages = [
         price: "₹600",
         icon: Ticket,
         featured: true,
-        link: "https://happyvalley.royal300.com/client/dashboard"
+        link: "https://happyvalley.royal300.com/client/book"
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ const defaultPackages = [
         color: "from-orange-500 to-red-600",
         price: "₹200",
         icon: Zap,
-        link: "https://happyvalley.royal300.com/client/dashboard"
+        link: "https://happyvalley.royal300.com/client/book"
     },
     {
         id: 4,
@@ -51,7 +51,7 @@ const defaultPackages = [
         color: "from-blue-500 to-blue-700",
         price: "₹40",
         icon: DoorOpen,
-        link: "https://happyvalley.royal300.com/client/dashboard"
+        link: "https://happyvalley.royal300.com/client/book"
     }
 ];
 
@@ -93,7 +93,7 @@ const TicketPackages = () => {
                         price: pkg.price || '',
                         icon: getIconForPackage(pkg),
                         featured: pkg.featured == 1,
-                        link: pkg.link || 'https://happyvalley.royal300.com/client/dashboard',
+                        link: pkg.link || 'https://happyvalley.royal300.com/client/book',
                     }));
                     setTicketPackages(mappedPackages);
                 }
@@ -189,10 +189,10 @@ const TicketPackages = () => {
                                     {/* Book Ticket Button */}
                                     <div className="mt-4">
                                         <div className={`w-full py-2 bg-white rounded-lg text-center font-bold text-sm uppercase tracking-wide group-hover:scale-105 transition-transform duration-300 ${pkg.color.includes('cyan') ? 'text-cyan-600' :
-                                                pkg.color.includes('purple') ? 'text-purple-600' :
-                                                    pkg.color.includes('orange') ? 'text-orange-600' :
-                                                        pkg.color.includes('green') ? 'text-green-600' :
-                                                            'text-blue-600'
+                                            pkg.color.includes('purple') ? 'text-purple-600' :
+                                                pkg.color.includes('orange') ? 'text-orange-600' :
+                                                    pkg.color.includes('green') ? 'text-green-600' :
+                                                        'text-blue-600'
                                             }`}>
                                             Book Ticket
                                         </div>

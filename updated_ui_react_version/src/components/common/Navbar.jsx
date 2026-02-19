@@ -120,14 +120,16 @@ const Navbar = () => {
                             ))}
 
                             <div className="flex items-center gap-4 ml-4">
-                                <Link
-                                    to="/dashboard"
+                                <a
+                                    href="https://happyvalley.royal300.com/client/dashboard"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className={`p-2 rounded-full transition-colors ${iconClasses}`}
                                 >
                                     <User size={20} />
-                                </Link>
+                                </a>
                                 <a
-                                    href="https://happyvalley.royal300.com/client/dashboard"
+                                    href="https://happyvalley.royal300.com/client/book"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="bg-wonderla-yellow text-black font-extrabold px-6 py-2.5 rounded-full hover:bg-yellow-400 transition-all shadow-lg hover:shadow-yellow-500/50 flex items-center gap-2 text-sm"
@@ -234,7 +236,7 @@ const Navbar = () => {
 
                                 <div className="mt-8 space-y-4">
                                     <a
-                                        href="https://happyvalley.royal300.com/client/dashboard"
+                                        href="https://happyvalley.royal300.com/client/book"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full bg-wonderla-yellow text-black font-extrabold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 text-lg active:scale-95 transition-transform"
@@ -243,13 +245,15 @@ const Navbar = () => {
                                         BOOK NOW
                                     </a>
 
-                                    <Link
-                                        to="/dashboard"
+                                    <a
+                                        href="https://happyvalley.royal300.com/client/dashboard"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="w-full bg-gray-900 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-lg active:scale-95 transition-transform"
                                     >
                                         <User size={20} />
                                         MY ACCOUNT
-                                    </Link>
+                                    </a>
                                 </div>
 
                                 <div className="mt-8 text-center text-xs text-gray-400">
