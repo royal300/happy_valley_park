@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
-import reel1 from '../../assets/videos/hvp_reels1.webm';
-import reel2 from '../../assets/videos/hvp_reels2.webm';
-import reel3 from '../../assets/videos/hvp_reels3.webm';
-import reel4 from '../../assets/videos/hvp_reels4.webm';
-import reel5 from '../../assets/videos/hvp_reels5.webm';
+import reel1 from '../../assets/videos/hvp_reels1.mp4';
+import reel2 from '../../assets/videos/hvp_reels2.mp4';
+import reel3 from '../../assets/videos/hvp_reels3.mp4';
+import reel4 from '../../assets/videos/hvp_reels4.mp4';
+import reel5 from '../../assets/videos/hvp_reels5.mp4';
 
 // Mock Data for Reels
 const reels = [

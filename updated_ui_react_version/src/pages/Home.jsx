@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import ScrollReveal from '../components/common/ScrollReveal';
 
 // Images
-import resortImg from '../assets/images/resort.webp';
-import picnicImg from '../assets/images/picnic_spot.webp';
-import sittingImg from '../assets/images/sitingpark.webp';
+import resortImg from '../assets/images/resort.jpg';
+import picnicImg from '../assets/images/picnic_spot.jpg';
+import sittingImg from '../assets/images/sitingpark.jpg';
 
 import OfferBanners from '../components/home/OfferBanners'; // Import OfferBanners
 

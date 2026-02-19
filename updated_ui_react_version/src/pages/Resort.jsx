@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '../components/common/ScrollReveal';
 
 // Resort Images
-import resort1 from '../assets/Resort/Copy of DSC00539.webp';
-import resort2 from '../assets/Resort/IMG_2636.webp';
-import resort3 from '../assets/Resort/IMG_2640.webp';
-import resort4 from '../assets/Resort/IMG_2643.webp';
-import resort5 from '../assets/Resort/IMG_2645.webp';
-import resort6 from '../assets/Resort/IMG_2648.webp';
-import resort7 from '../assets/Resort/IMG_2656.webp';
+import resort1 from '../assets/Resort/Copy of DSC00539.JPG';
+import resort2 from '../assets/Resort/IMG_2636.jpg';
+import resort3 from '../assets/Resort/IMG_2640.jpg';
+import resort4 from '../assets/Resort/IMG_2643.jpg';
+import resort5 from '../assets/Resort/IMG_2645.jpg';
+import resort6 from '../assets/Resort/IMG_2648.jpg';
+import resort7 from '../assets/Resort/IMG_2656.jpg';
 
 const Resort = () => {
     const resortRooms = [

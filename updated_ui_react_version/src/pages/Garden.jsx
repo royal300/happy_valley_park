@@ -3,20 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '../components/common/ScrollReveal';
 
 // Garden Images
-import garden1 from '../assets/Garden/DSC00482.webp';
-import garden2 from '../assets/Garden/DSC00496.webp';
-import garden3 from '../assets/Garden/DSC00507.webp';
-import garden4 from '../assets/Garden/DSC00508.webp';
-import garden5 from '../assets/Garden/DSC00518.webp';
-import garden6 from '../assets/Garden/IMG_2488.webp';
-import garden7 from '../assets/Garden/IMG_2491.webp';
-import garden8 from '../assets/Garden/IMG_2512.webp';
-import garden9 from '../assets/Garden/IMG_2534.webp';
-import garden10 from '../assets/Garden/IMG_2602.webp';
-import garden11 from '../assets/Garden/IMG_2610.webp';
-import garden12 from '../assets/Garden/IMG_2615.webp';
-import garden13 from '../assets/Garden/IMG_2628.webp';
-import indiaGate from '../assets/Garden/india gate.webp';
+import garden1 from '../assets/Garden/DSC00482.JPG';
+import garden2 from '../assets/Garden/DSC00496.JPG';
+import garden3 from '../assets/Garden/DSC00507.JPG';
+import garden4 from '../assets/Garden/DSC00508.JPG';
+import garden5 from '../assets/Garden/DSC00518.JPG';
+import garden6 from '../assets/Garden/IMG_2488.jpg';
+import garden7 from '../assets/Garden/IMG_2491.jpg';
+import garden8 from '../assets/Garden/IMG_2512.jpg';
+import garden9 from '../assets/Garden/IMG_2534.jpg';
+import garden10 from '../assets/Garden/IMG_2602.jpg';
+import garden11 from '../assets/Garden/IMG_2610.jpg';
+import garden12 from '../assets/Garden/IMG_2615.jpg';
+import garden13 from '../assets/Garden/IMG_2628.jpg';
+import indiaGate from '../assets/Garden/india gate.jpg';
 
 const Garden = () => {
     const gardenImages = [

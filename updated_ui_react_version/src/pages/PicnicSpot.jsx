@@ -3,16 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '../components/common/ScrollReveal';
 
 // Picnic Spot Images
-import picnic1 from '../assets/Picnic Spot/DSC00417.webp';
-import picnic2 from '../assets/Picnic Spot/DSC00419.webp';
-import picnic3 from '../assets/Picnic Spot/DSC00421.webp';
-import picnic4 from '../assets/Picnic Spot/DSC00423.webp';
-import picnic5 from '../assets/Picnic Spot/DSC00425.webp';
-import picnic6 from '../assets/Picnic Spot/DSC00428.webp';
+import picnic1 from '../assets/Picnic Spot/DSC00417.JPG';
+import picnic2 from '../assets/Picnic Spot/DSC00419.JPG';
+import picnic3 from '../assets/Picnic Spot/DSC00421.JPG';
+import picnic4 from '../assets/Picnic Spot/DSC00423.JPG';
+import picnic5 from '../assets/Picnic Spot/DSC00425.JPG';
+import picnic6 from '../assets/Picnic Spot/DSC00428.JPG';
 
-import picnic8 from '../assets/Picnic Spot/IMG_2519.webp';
-import picnic9 from '../assets/Picnic Spot/IMG_2521.webp';
-import picnic10 from '../assets/Picnic Spot/IMG_2522.webp';
+import picnic8 from '../assets/Picnic Spot/IMG_2519.jpg';
+import picnic9 from '../assets/Picnic Spot/IMG_2521.jpg';
+import picnic10 from '../assets/Picnic Spot/IMG_2522.jpg';
 
 const PicnicSpot = () => {
     const picnicImages = [

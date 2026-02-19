@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { Ticket, Droplets, Zap, DoorOpen } from 'lucide-react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import waterParkImg from '../../assets/images/water_park.webp';
-import dryParkImg from '../../assets/images/dry_park.webp';
-import comboParkImg from '../../assets/images/combo_park.webp';
-import entryTicketImg from '../../assets/images/entry_ticket.webp';
+import waterParkImg from '../../assets/images/water_park.png';
+import dryParkImg from '../../assets/images/dry_park.png';
+import comboParkImg from '../../assets/images/combo_park.png';
+import entryTicketImg from '../../assets/images/entry_ticket.png';
 
 const defaultPackages = [
     {

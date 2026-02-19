@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { ridesData } from '../data/ridesData';
-import show5DImg from '../assets/Dry Park/5D Show.webp';
+import show5DImg from '../assets/Dry Park/5D Show.jpg';
 
 const Attractions = () => {
     const [filter, setFilter] = useState('All');

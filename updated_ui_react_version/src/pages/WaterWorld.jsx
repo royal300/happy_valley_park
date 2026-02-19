@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { ridesData } from '../data/ridesData';
-import heroImg from '../assets/Water Park/Multi Slide Water Ride.webp';
+import heroImg from '../assets/Water Park/Multi Slide Water Ride.JPG';
 
 const WaterWorld = () => {
     // Filter only Water Park rides

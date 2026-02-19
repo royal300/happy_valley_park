@@ -25,8 +25,8 @@ const OfferBanners = () => {
 
     // Fallback to hardcoded images if no offers in DB
     const fallbackOffers = [
-        { id: 'f1', title: 'Water Park Offer', image_url: '/water_park_poster_final.webp' },
-        { id: 'f2', title: 'Dry Park Offer', image_url: '/dry_park_poster_final.webp' },
+        { id: 'f1', title: 'Water Park Offer', image_url: '/water_park_poster_final.jpg' },
+        { id: 'f2', title: 'Dry Park Offer', image_url: '/dry_park_poster_final.jpg' },
     ];
 
     const displayOffers = offers.length > 0 ? offers : (loading ? [] : fallbackOffers);
