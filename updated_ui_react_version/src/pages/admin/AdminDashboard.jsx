@@ -4,6 +4,7 @@ import HeroManager from './tabs/HeroManager';
 import AttractionManager from './tabs/AttractionManager';
 import TicketManager from './tabs/TicketManager';
 import OfferManager from './tabs/OfferManager';
+import PopupManager from './tabs/PopupManager';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -26,6 +27,7 @@ const AdminDashboard = () => {
         { id: 'events', label: 'Special Events', icon: '🎪' },
         { id: 'offers', label: 'Offer Banners', icon: '🏷️' },
         { id: 'tickets', label: 'Ticket Packages', icon: '🎫' },
+        { id: 'popup', label: 'Popup', icon: '📢' },
     ];
 
     return (
@@ -49,8 +51,8 @@ const AdminDashboard = () => {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`text-left px-4 py-3 rounded transition whitespace-nowrap text-sm md:text-base ${activeTab === tab.id
-                                        ? 'bg-blue-600 text-white font-bold'
-                                        : 'hover:bg-gray-100 text-gray-700'
+                                    ? 'bg-blue-600 text-white font-bold'
+                                    : 'hover:bg-gray-100 text-gray-700'
                                     }`}
                             >
                                 <span className="mr-2">{tab.icon}</span>
@@ -67,6 +69,7 @@ const AdminDashboard = () => {
                         {activeTab === 'events' && <AttractionManager />}
                         {activeTab === 'offers' && <OfferManager />}
                         {activeTab === 'tickets' && <TicketManager />}
+                        {activeTab === 'popup' && <PopupManager />}
                     </div>
                 </div>
             </div>

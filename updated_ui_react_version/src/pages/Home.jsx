@@ -13,11 +13,13 @@ import sittingImg from '../assets/images/sitingpark.jpg';
 
 import OfferBanners from '../components/home/OfferBanners'; // Import OfferBanners
 
-import AttractionHighlights from '../components/home/AttractionHighlights'; // Import AttractionHighlights
+import AttractionHighlights from '../components/home/AttractionHighlights';
+import WelcomePopup from '../components/home/WelcomePopup';
 
 const Home = () => {
     return (
         <div className="bg-white">
+            <WelcomePopup />
             <Hero />
 
             <ScrollReveal>
