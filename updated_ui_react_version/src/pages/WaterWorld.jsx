@@ -17,7 +17,7 @@ const WaterWorld = () => {
                     alt="Water World"
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center pt-20">
                     <div className="text-center text-white px-4">
                         <motion.h1
                             initial={{ y: 30, opacity: 0 }}
