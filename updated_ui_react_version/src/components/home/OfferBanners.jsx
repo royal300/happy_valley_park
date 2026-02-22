@@ -1,37 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const OfferBanners = () => {
-    const [offers, setOffers] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchOffers = async () => {
-            try {
-                const apiUrl = '/backend/api/offers.php';
-                const response = await axios.get(apiUrl);
-                if (Array.isArray(response.data) && response.data.length > 0) {
-                    setOffers(response.data);
-                }
-            } catch (error) {
-                console.error('Failed to fetch offers');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchOffers();
-    }, []);
-
-    // Fallback to hardcoded images if no offers in DB
-    const fallbackOffers = [
-        { id: 'f1', title: 'Water Park Offer', image_url: '/water_park_poster_final.jpg' },
-        { id: 'f2', title: 'Dry Park Offer', image_url: '/dry_park_poster_final.jpg' },
+    const displayOffers = [
+        { id: 'f1', title: 'Dry Park Offer', image_url: '/dry_park_poster_final.jpg' },
+        { id: 'f2', title: 'Water Park Offer', image_url: '/water_park_poster_final.jpg' }
     ];
-
-    const displayOffers = offers.length > 0 ? offers : (loading ? [] : fallbackOffers);
-
-    if (loading) return null; // Don't flash content while loading
 
     return (
         <section className="container mx-auto px-4 py-12">
