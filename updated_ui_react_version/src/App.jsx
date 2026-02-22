@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import ScrollToTop from './components/common/ScrollToTop';
 import MainLayout from './layouts/MainLayout';
 
 // Lazy Load Pages
@@ -32,6 +33,7 @@ const PageLoader = () => (
 const App = () => {
   return (
     <Suspense fallback={<PageLoader />}>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
