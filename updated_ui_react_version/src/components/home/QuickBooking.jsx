@@ -35,9 +35,14 @@ const QuickBooking = () => {
                 </div>
 
                 <div className="w-full md:w-auto">
-                    <button className="w-full bg-wonderla-blue text-white font-bold text-lg px-8 py-3 rounded-lg hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-200 active:scale-95">
+                    <a
+                        href="https://happyvalley.royal300.com/client/book"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full block text-center bg-wonderla-blue text-white font-bold text-lg px-8 py-3 rounded-lg hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-200 active:scale-95"
+                    >
                         CHECK AVAILABILITY
-                    </button>
+                    </a>
                 </div>
 
             </div>

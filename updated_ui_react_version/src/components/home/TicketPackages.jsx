@@ -93,7 +93,7 @@ const TicketPackages = () => {
                         price: pkg.price || '',
                         icon: getIconForPackage(pkg),
                         featured: pkg.featured == 1,
-                        link: pkg.link || 'https://happyvalley.royal300.com/client/book',
+                        link: (pkg.link && !pkg.link.includes('client/dashboard')) ? pkg.link : 'https://happyvalley.royal300.com/client/book',
                     }));
                     setTicketPackages(mappedPackages);
                 }
@@ -194,7 +194,7 @@ const TicketPackages = () => {
                                                     pkg.color.includes('green') ? 'text-green-600' :
                                                         'text-blue-600'
                                             }`}>
-                                            Book Ticket
+                                            Book Now
                                         </div>
                                     </div>
                                 </div>

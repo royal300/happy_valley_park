@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Ticket } from 'lucide-react';
-import heroVideo from '../../assets/videos/hvp_banner.mp4';
+const heroVideo = '/hvp_banner.mp4';
 import ticketIcon from '../../assets/images/ticket-icon.png';
 import { Link } from 'react-router-dom';
 

@@ -37,7 +37,7 @@ const TicketManager = () => {
             original_price: ticket.original_price || '',
             discount: ticket.discount || '',
             color: ticket.color || 'from-blue-500 to-blue-700',
-            link: ticket.link || 'https://happyvalley.royal300.com/client/dashboard',
+            link: ticket.link || 'https://happyvalley.royal300.com/client/book',
         });
     };
 
@@ -50,7 +50,7 @@ const TicketManager = () => {
             original_price: '',
             discount: '',
             color: 'from-blue-500 to-blue-700',
-            link: 'https://happyvalley.royal300.com/client/dashboard',
+            link: 'https://happyvalley.royal300.com/client/book',
         });
     };
 

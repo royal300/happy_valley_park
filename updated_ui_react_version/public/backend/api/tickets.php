@@ -48,8 +48,7 @@ if ($method === 'GET') {
     $price = $data['price'] ?? '';
     $originalPrice = $data['original_price'] ?? ($data['originalPrice'] ?? '');
     $discount = $data['discount'] ?? '';
-    $color = $data['color'] ?? 'from-blue-500 to-blue-700';
-    $link = $data['link'] ?? 'https://happyvalley.royal300.com/client/dashboard';
+    $link = $data['link'] ?? 'https://happyvalley.royal300.com/client/book';
 
     if (empty($name) || empty($price)) {
         http_response_code(400);
