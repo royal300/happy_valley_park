@@ -2,139 +2,108 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
-import ffmpeg from 'fluent-ffmpeg';
-import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
-import ffprobeInstaller from '@ffprobe-installer/ffprobe';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Set ffmpeg paths
-ffmpeg.setFfmpegPath(ffmpegInstaller.path);
-ffmpeg.setFfprobePath(ffprobeInstaller.path);
+const dirsToScan = [
+    path.join(__dirname, '../public'),
+    path.join(__dirname, '../src/assets')
+];
 
-const ASSETS_DIR = path.join(__dirname, '../src/assets');
-const MAX_IMAGE_WIDTH = 1024; // Reduced to 1024 for smaller files
-const IMAGE_QUALITY = 65; // More aggressive compression
-const VIDEO_CRF = 32; // Higher CRF = more compression
-const VIDEO_HEIGHT = 480; // Lower resolution for web
+const ignoredFiles = [
+    'hvp_banner.mp4' // Hero video
+];
 
-// Helper to recursively get files
-function getFiles(dir) {
-    let results = [];
-    if (!fs.existsSync(dir)) return results;
-    const list = fs.readdirSync(dir);
-    list.forEach(file => {
-        file = path.join(dir, file);
-        const stat = fs.statSync(file);
-        if (stat && stat.isDirectory()) {
-            results = results.concat(getFiles(file));
-        } else {
-            results.push(file);
-        }
-    });
-    return results;
-}
+const imageExts = ['.jpg', '.jpeg', '.png', '.webp'];
+const videoExts = ['.mp4'];
 
-async function optimizeImage(filePath) {
+async function processFile(filePath) {
+    const filename = path.basename(filePath);
+    if (ignoredFiles.includes(filename)) {
+        console.log(`Skipping ignored file: ${filename}`);
+        return;
+    }
+
+    const stats = fs.statSync(filePath);
+    const originalSizeMB = stats.size / (1024 * 1024);
     const ext = path.extname(filePath).toLowerCase();
-    if (!['.jpg', '.jpeg', '.png'].includes(ext)) return;
 
-    const tempPath = filePath + '.temp' + ext;
-    const initialSize = fs.statSync(filePath).size;
+    // Only process if larger than 100KB for images, or 500KB for videos
+    if (imageExts.includes(ext) && stats.size > 100 * 1024) {
+        console.log(`\nOptimizing Image: ${filename} (${originalSizeMB.toFixed(2)} MB)`);
+        const tempPath = filePath + '.tmp' + ext;
 
-    // Skip small images (< 200KB)
-    if (initialSize < 200 * 1024) return;
+        try {
+            await sharp(filePath)
+                .rotate() // preserve exif rotation
+                .resize({ width: 1920, withoutEnlargement: true }) // max width 1920
+                .jpeg({ quality: 70, force: false })
+                .png({ quality: 70, force: false })
+                .webp({ quality: 70, force: false })
+                .toFile(tempPath);
 
-    try {
-        console.log(`Processing image: ${path.basename(filePath)} (${(initialSize / 1024 / 1024).toFixed(2)} MB)`);
-
-        const pipeline = sharp(filePath);
-        const metadata = await pipeline.metadata();
-
-        if (metadata.width > MAX_IMAGE_WIDTH) {
-            pipeline.resize(MAX_IMAGE_WIDTH);
-        }
-
-        if (ext === '.png') {
-            await pipeline.png({ quality: IMAGE_QUALITY, compressionLevel: 9 }).toFile(tempPath);
-        } else {
-            await pipeline.jpeg({ quality: IMAGE_QUALITY, mozjpeg: true }).toFile(tempPath);
-        }
-
-        const newSize = fs.statSync(tempPath).size;
-
-        if (newSize < initialSize) {
             fs.renameSync(tempPath, filePath);
-            console.log(`✅ Optimized: ${path.basename(filePath)} -> ${(newSize / 1024 / 1024).toFixed(2)} MB (Saved ${((initialSize - newSize) / 1024 / 1024).toFixed(2)} MB)`);
-        } else {
-            fs.unlinkSync(tempPath);
-            console.log(`Skipped (no gain): ${path.basename(filePath)}`);
+            const newStats = fs.statSync(filePath);
+            const newSizeMB = newStats.size / (1024 * 1024);
+            const reduction = ((originalSizeMB - newSizeMB) / originalSizeMB * 100).toFixed(1);
+            console.log(`✅ Saved ${reduction}% -> New Size: ${newSizeMB.toFixed(2)} MB`);
+        } catch (err) {
+            console.error(`❌ Failed to process ${filename}:`, err.message);
+            if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
         }
+    } else if (videoExts.includes(ext) && stats.size > 500 * 1024) {
+        console.log(`\nOptimizing Video: ${filename} (${originalSizeMB.toFixed(2)} MB)`);
+        const tempPath = filePath + '.tmp.mp4';
 
-    } catch (error) {
-        console.error(`❌ Error processing ${path.basename(filePath)}:`, error.message);
-        if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
+        try {
+            // Re-encode with x264, resize to max 720p height, faststart for web
+            execSync(`ffmpeg -y -i "${filePath}" -vcodec libx264 -crf 28 -preset fast -vf "scale=-2:'min(720,ih)'" -acodec aac -b:a 128k -movflags +faststart "${tempPath}"`, { stdio: 'ignore' });
+
+            fs.renameSync(tempPath, filePath);
+            const newStats = fs.statSync(filePath);
+            const newSizeMB = newStats.size / (1024 * 1024);
+            const reduction = ((originalSizeMB - newSizeMB) / originalSizeMB * 100).toFixed(1);
+            console.log(`✅ Saved ${reduction}% -> New Size: ${newSizeMB.toFixed(2)} MB`);
+        } catch (err) {
+            console.error(`❌ Failed to process ${filename}:`, err.message);
+            if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
+        }
     }
 }
 
-function optimizeVideo(filePath) {
-    return new Promise((resolve, reject) => {
-        const ext = path.extname(filePath).toLowerCase();
-        if (ext !== '.mp4') return resolve();
+function scanDir(dir) {
+    if (!fs.existsSync(dir)) return [];
+    let processingPromises = [];
 
-        const initialSize = fs.statSync(filePath).size;
-        // Skip small videos (< 5MB)
-        if (initialSize < 5 * 1024 * 1024) return resolve();
+    const files = fs.readdirSync(dir);
+    for (const file of files) {
+        // Skip hidden files/folders and specific directories if needed
+        if (file.startsWith('.')) continue;
+        if (file === 'uploads') continue; // Skip live uploads folder from dev testing
 
-        const tempPath = filePath + '.temp.mp4';
+        const fullPath = path.join(dir, file);
+        const stat = fs.statSync(fullPath);
 
-        console.log(`Processing video: ${path.basename(filePath)} (${(initialSize / 1024 / 1024).toFixed(2)} MB)`);
-
-        ffmpeg(filePath)
-            .outputOptions([
-                '-c:v libx264',
-                `-crf ${VIDEO_CRF}`,
-                '-preset slow',
-                `-vf scale=-2:${VIDEO_HEIGHT}`,
-                '-c:a aac',
-                '-b:a 128k'
-            ])
-            .save(tempPath)
-            .on('end', () => {
-                const newSize = fs.statSync(tempPath).size;
-                if (newSize < initialSize) {
-                    fs.renameSync(tempPath, filePath);
-                    console.log(`✅ Optimized: ${path.basename(filePath)} -> ${(newSize / 1024 / 1024).toFixed(2)} MB (Saved ${((initialSize - newSize) / 1024 / 1024).toFixed(2)} MB)`);
-                } else {
-                    fs.unlinkSync(tempPath);
-                    console.log(`Skipped (no gain): ${path.basename(filePath)}`);
-                }
-                resolve();
-            })
-            .on('error', (err) => {
-                console.error(`❌ Error processing ${path.basename(filePath)}:`, err.message);
-                if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
-                resolve();
-            });
-    });
+        if (stat.isDirectory()) {
+            processingPromises.push(...scanDir(fullPath));
+        } else {
+            processingPromises.push(processFile(fullPath));
+        }
+    }
+    return processingPromises;
 }
 
 async function main() {
-    console.log("🚀 Starting Media Optimization...");
-    const files = getFiles(ASSETS_DIR);
+    console.log("Starting Media Optimization...");
+    let promises = [];
+    dirsToScan.forEach(dir => {
+        promises.push(...scanDir(dir));
+    });
 
-    // Process Images
-    for (const file of files) {
-        await optimizeImage(file);
-    }
-
-    // Process Videos
-    for (const file of files) {
-        await optimizeVideo(file);
-    }
-
-    console.log("🎉 All optimizations complete!");
+    await Promise.all(promises);
+    console.log("Optimization Complete!");
 }
 
 main();
