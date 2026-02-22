@@ -30,10 +30,31 @@ const WaterWorld = () => {
                             initial={{ y: 30, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="text-xl md:text-2xl max-w-2xl mx-auto"
+                            className="text-xl md:text-2xl max-w-2xl mx-auto mb-8"
                         >
                             Dive into a world of coolness and fun. The best water park experience in West Bengal.
                         </motion.p>
+                        <motion.a
+                            href="https://happyvalley.royal300.com/client/book"
+                            initial={{ y: 30, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            whileHover={{ scale: 1.08 }}
+                            whileTap={{ scale: 0.96 }}
+                            className="inline-flex items-center gap-3 px-10 py-4 rounded-full text-base sm:text-lg font-extrabold uppercase tracking-wide text-white relative overflow-hidden"
+                            style={{
+                                background: 'linear-gradient(135deg, #0ea5e9, #06b6d4, #0891b2)',
+                                boxShadow: '0 0 30px rgba(14, 165, 233, 0.7), 0 0 60px rgba(6, 182, 212, 0.4), 0 4px 20px rgba(0,0,0,0.4)',
+                            }}
+                        >
+                            {/* Animated shine */}
+                            <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                                animate={{ x: ['-100%', '200%'] }}
+                                transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.5, ease: 'easeInOut' }}
+                            />
+                            <span className="relative z-10">🎟️ Book Tickets</span>
+                        </motion.a>
                     </div>
                 </div>
             </div>

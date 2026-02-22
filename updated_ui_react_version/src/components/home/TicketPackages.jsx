@@ -111,8 +111,6 @@ const TicketPackages = () => {
                     {ticketPackages.map((pkg, idx) => (
                         <a
                             href={pkg.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             key={pkg.id}
                         >
                             <motion.div
