@@ -6,7 +6,7 @@ const HeroManager = () => {
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
     const [progress, setProgress] = useState(0);
-    const apiUrl = import.meta.env.PROD ? '/backend/api/hero.php' : 'http://localhost:8000/backend/api/hero.php';
+    const apiUrl = '/backend/api/hero.php';
 
     useEffect(() => {
         fetchCurrentVideo();

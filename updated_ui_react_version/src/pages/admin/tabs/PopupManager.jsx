@@ -6,7 +6,7 @@ const PopupManager = () => {
     const [popups, setPopups] = useState([]);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
-    const apiUrl = import.meta.env.PROD ? '/backend/api/popup.php' : 'http://localhost:8000/backend/api/popup.php';
+    const apiUrl = '/backend/api/popup.php';
 
     useEffect(() => {
         fetchPopups();

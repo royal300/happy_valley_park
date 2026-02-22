@@ -8,7 +8,7 @@ const AttractionHighlights = () => {
     useEffect(() => {
         const fetchAttractions = async () => {
             try {
-                const apiUrl = import.meta.env.PROD ? '/backend/api/attractions.php' : 'http://localhost:8000/backend/api/attractions.php';
+                const apiUrl = '/backend/api/attractions.php';
                 const response = await axios.get(apiUrl);
                 if (Array.isArray(response.data)) {
                     setAttractions(response.data);

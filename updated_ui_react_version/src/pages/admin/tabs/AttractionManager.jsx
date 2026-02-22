@@ -6,7 +6,7 @@ const AttractionManager = () => {
     const [attractions, setAttractions] = useState([]);
     const [newTitle, setNewTitle] = useState('');
     const [uploading, setUploading] = useState(false);
-    const apiUrl = import.meta.env.PROD ? '/backend/api/attractions.php' : 'http://localhost:8000/backend/api/attractions.php';
+    const apiUrl = '/backend/api/attractions.php';
 
     useEffect(() => {
         fetchAttractions();

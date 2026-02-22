@@ -14,7 +14,7 @@ const WelcomePopup = () => {
 
         const fetchPopup = async () => {
             try {
-                const apiUrl = import.meta.env.PROD ? '/backend/api/popup.php' : 'http://localhost:8000/backend/api/popup.php';
+                const apiUrl = '/backend/api/popup.php';
                 const response = await axios.get(apiUrl);
                 if (response.data.image_url && response.data.is_active == 1) {
                     setPopup(response.data);

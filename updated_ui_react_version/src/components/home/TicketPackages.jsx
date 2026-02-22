@@ -79,7 +79,7 @@ const TicketPackages = () => {
     useEffect(() => {
         const fetchPackages = async () => {
             try {
-                const apiUrl = import.meta.env.PROD ? '/backend/api/tickets.php' : 'http://localhost:8000/backend/api/tickets.php';
+                const apiUrl = '/backend/api/tickets.php';
                 const response = await axios.get(apiUrl);
                 if (Array.isArray(response.data) && response.data.length > 0) {
                     const mappedPackages = response.data.map(pkg => ({

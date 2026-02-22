@@ -7,7 +7,7 @@ const OfferManager = () => {
     const [newTitle, setNewTitle] = useState('');
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
-    const apiUrl = import.meta.env.PROD ? '/backend/api/offers.php' : 'http://localhost:8000/backend/api/offers.php';
+    const apiUrl = '/backend/api/offers.php';
 
     useEffect(() => {
         fetchOffers();

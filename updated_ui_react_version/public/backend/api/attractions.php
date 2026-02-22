@@ -16,31 +16,78 @@ if ($method === 'GET') {
         echo json_encode([]);
     }
 } elseif ($method === 'POST') {
-    if (isset($_FILES['image'])) {
-        $file = $_FILES['image'];
-        $fileName = time() . '_' . basename($file['name']);
-        $targetPath = $uploadDir . $fileName;
-        
-        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-            $imageUrl = '/backend/api/uploads/attractions/' . $fileName;
-            $title = $_POST['title'] ?? 'New Attraction';
+    if (!isset($_FILES['image'])) {
+        http_response_code(400);
+        echo json_encode(['error' => 'No image uploaded']);
+        exit;
+    }
 
-            $newId = time(); // Mock ID
-            if ($pdo) {
+    $file = $_FILES['image'];
+
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Upload error code: ' . $file['error']]);
+        exit;
+    }
+
+    $fileName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', basename($file['name']));
+    $targetPath = $uploadDir . $fileName;
+
+    $allowedExts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+    $ext = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
+    if (!in_array($ext, $allowedExts)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid file type. Allowed: jpg, png, webp, gif']);
+        exit;
+    }
+
+    // Compress helper function
+    function compressImage($source, $destination, $quality) {
+        $info = getimagesize($source);
+        if ($info['mime'] == 'image/jpeg') {
+            $image = @imagecreatefromjpeg($source);
+            if ($image) { imagejpeg($image, $destination, $quality); imagedestroy($image); }
+            else { move_uploaded_file($source, $destination); }
+        } elseif ($info['mime'] == 'image/png') {
+            $image = @imagecreatefrompng($source);
+            if ($image) { 
+                imagealphablending($image, false);
+                imagesavealpha($image, true);
+                $pngQuality = round(($quality/100) * 9);
+                imagepng($image, $destination, 9 - $pngQuality); 
+                imagedestroy($image); 
+            } else { move_uploaded_file($source, $destination); }
+        } elseif ($info['mime'] == 'image/webp') {
+            $image = @imagecreatefromwebp($source);
+            if ($image) { imagewebp($image, $destination, $quality); imagedestroy($image); }
+            else { move_uploaded_file($source, $destination); }
+        } else {
+            move_uploaded_file($source, $destination);
+        }
+        return file_exists($destination);
+    }
+
+    if (compressImage($file['tmp_name'], $targetPath, 60)) {
+        $imageUrl = '/backend/api/uploads/attractions/' . $fileName;
+        $title = $_POST['title'] ?? 'New Attraction';
+
+        $newId = time(); // Mock ID
+        if ($pdo) {
+            try {
                 $sql = "INSERT INTO attractions (title, image_url) VALUES (:title, :url)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(['title' => $title, 'url' => $imageUrl]);
                 $newId = $pdo->lastInsertId();
+            } catch (PDOException $e) {
+                echo json_encode(['success' => true, 'id' => $newId, 'image_url' => $imageUrl, 'title' => $title, 'warning' => 'DB insert failed']);
+                exit;
             }
-
-            echo json_encode(['success' => true, 'id' => $newId, 'image_url' => $imageUrl, 'title' => $title, 'mock_mode' => !$pdo]);
-        } else {
-            http_response_code(500);
-            echo json_encode(['error' => 'File upload failed']);
         }
+
+        echo json_encode(['success' => true, 'id' => $newId, 'image_url' => $imageUrl, 'title' => $title, 'mock_mode' => !$pdo]);
     } else {
-        http_response_code(400);
-        echo json_encode(['error' => 'No image uploaded']);
+        http_response_code(500);
+        echo json_encode(['error' => 'File upload/compression failed']);
     }
 } elseif ($method === 'DELETE') {
     $data = json_decode(file_get_contents("php://input"), true);

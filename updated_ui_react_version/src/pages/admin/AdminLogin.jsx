@@ -12,7 +12,7 @@ const AdminLogin = () => {
         e.preventDefault();
         try {
             // Adjust API URL as needed based on deployment
-            const apiUrl = import.meta.env.PROD ? '/backend/api/auth.php' : 'http://localhost:8000/backend/api/auth.php';
+            const apiUrl = '/backend/api/auth.php';
 
             const response = await axios.post(apiUrl, { username, password });
 

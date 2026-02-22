@@ -42,7 +42,33 @@ if ($method === 'GET') {
         exit;
     }
 
-    if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+    // Compress helper function
+    function compressImage($source, $destination, $quality) {
+        $info = getimagesize($source);
+        if ($info['mime'] == 'image/jpeg') {
+            $image = @imagecreatefromjpeg($source);
+            if ($image) { imagejpeg($image, $destination, $quality); imagedestroy($image); }
+            else { move_uploaded_file($source, $destination); }
+        } elseif ($info['mime'] == 'image/png') {
+            $image = @imagecreatefrompng($source);
+            if ($image) { 
+                imagealphablending($image, false);
+                imagesavealpha($image, true);
+                $pngQuality = round(($quality/100) * 9);
+                imagepng($image, $destination, 9 - $pngQuality); 
+                imagedestroy($image); 
+            } else { move_uploaded_file($source, $destination); }
+        } elseif ($info['mime'] == 'image/webp') {
+            $image = @imagecreatefromwebp($source);
+            if ($image) { imagewebp($image, $destination, $quality); imagedestroy($image); }
+            else { move_uploaded_file($source, $destination); }
+        } else {
+            move_uploaded_file($source, $destination);
+        }
+        return file_exists($destination);
+    }
+
+    if (compressImage($file['tmp_name'], $targetPath, 60)) {
         $imageUrl = '/backend/api/uploads/offers/' . $fileName;
         $title = $_POST['title'] ?? 'Offer Banner';
 
@@ -62,7 +88,7 @@ if ($method === 'GET') {
         echo json_encode(['success' => true, 'id' => $newId, 'image_url' => $imageUrl, 'title' => $title]);
     } else {
         http_response_code(500);
-        echo json_encode(['error' => 'Failed to move uploaded file']);
+        echo json_encode(['error' => 'Failed to move/compress uploaded file']);
     }
 } elseif ($method === 'DELETE') {
     $data = json_decode(file_get_contents("php://input"), true);

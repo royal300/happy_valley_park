@@ -8,7 +8,7 @@ const TicketManager = () => {
     const [editForm, setEditForm] = useState({});
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(true);
-    const apiUrl = import.meta.env.PROD ? '/backend/api/tickets.php' : 'http://localhost:8000/backend/api/tickets.php';
+    const apiUrl = '/backend/api/tickets.php';
 
     useEffect(() => {
         fetchTickets();

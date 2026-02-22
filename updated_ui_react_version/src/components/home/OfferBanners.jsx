@@ -9,7 +9,7 @@ const OfferBanners = () => {
     useEffect(() => {
         const fetchOffers = async () => {
             try {
-                const apiUrl = import.meta.env.PROD ? '/backend/api/offers.php' : 'http://localhost:8000/backend/api/offers.php';
+                const apiUrl = '/backend/api/offers.php';
                 const response = await axios.get(apiUrl);
                 if (Array.isArray(response.data) && response.data.length > 0) {
                     setOffers(response.data);
