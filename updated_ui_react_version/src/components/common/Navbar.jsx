@@ -252,7 +252,7 @@ const Navbar = () => {
                                         className="w-full bg-gray-900 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-lg active:scale-95 transition-transform"
                                     >
                                         <User size={20} />
-                                        MY ACCOUNT
+                                        MY TICKETS
                                     </a>
                                 </div>
 
