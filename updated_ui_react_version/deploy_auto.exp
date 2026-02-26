@@ -2,7 +2,7 @@
 
 # Configuration
 set timeout 300
-set host "93.127.206.52"
+set host "187.77.184.151"
 set user "root"
 set password "Royal300@2026"
 set script "./deploy.sh"

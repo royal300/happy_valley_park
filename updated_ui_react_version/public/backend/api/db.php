@@ -8,11 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-$host = getenv('DB_HOST') ?: '127.0.0.1';
+$host = getenv('DB_HOST') ?: '187.77.184.151';
 $port = getenv('DB_PORT') ?: '3306';
-$db   = getenv('DB_NAME') ?: 'happy_valley_frontend';
-$user = getenv('DB_USER') ?: 'myadmin';
-$pass = getenv('DB_PASS') ?: 'mypassword';
+$db   = getenv('DB_NAME') ?: 'happyvalleyfrontend';
+$user = getenv('DB_USER') ?: 'root';
+$pass = getenv('DB_PASS') ?: 'Royal300@2026';
 
 $charset = 'utf8mb4';
 

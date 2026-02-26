@@ -2,7 +2,7 @@
 
 # Configuration
 VPS_USER="root"
-VPS_IP="93.127.206.52"
+VPS_IP="187.77.184.151"
 REMOTE_ROOT="/var/www/happyvalley_frontend"
 PROJECT_SUBDIR="updated_ui_react_version"
 
