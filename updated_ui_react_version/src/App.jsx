@@ -55,9 +55,9 @@ const App = () => {
           <Route path="/picnic-spot" element={<PicnicSpot />} />
           <Route path="/garden" element={<Garden />} />
         </Route>
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        {/* Frontend Admin Routes */}
+        <Route path="/admin" element={<FrontendAdminLogin />} />
+        <Route path="/admin/dashboard" element={<FrontendAdminDashboard />} />
+        {/* Keep frontendadmin for compatibility if needed, or just redirect */}
         <Route path="/frontendadmin" element={<FrontendAdminLogin />} />
         <Route path="/frontendadmin/dashboard" element={<FrontendAdminDashboard />} />
       </Routes>
