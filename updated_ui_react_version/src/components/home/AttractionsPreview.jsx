@@ -137,12 +137,12 @@ const AttractionsPreview = () => {
                     </motion.h2>
 
                     {/* Category Labels (Read-only now) */}
-                    <div className="flex justify-center gap-3 mb-16">
-                        <div className="flex items-center gap-2.5 px-6 py-3 rounded-full font-bold text-base bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-xl">
+                    <div className="flex flex-wrap justify-center gap-4 mb-16">
+                        <div className="flex items-center justify-center gap-2.5 w-48 px-6 py-3 rounded-full font-bold text-base bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-xl transition-transform hover:scale-105">
                             <img src={waterSlideIcon} alt="Water Park" className="w-7 h-7" />
                             <span>Water Park</span>
                         </div>
-                        <div className="flex items-center gap-2.5 px-6 py-3 rounded-full font-bold text-base bg-gradient-to-r from-orange-400 to-orange-600 text-white shadow-xl">
+                        <div className="flex items-center justify-center gap-2.5 w-48 px-6 py-3 rounded-full font-bold text-base bg-gradient-to-r from-orange-400 to-orange-600 text-white shadow-xl transition-transform hover:scale-105">
                             <span className="text-2xl">🎢</span>
                             <span>Dry Park</span>
                         </div>
@@ -187,7 +187,7 @@ const AttractionsPreview = () => {
                                             alt={attraction.title}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
 
                                         {/* Ride Name */}
                                         <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -246,11 +246,11 @@ const AttractionsPreview = () => {
                                             alt={attraction.title}
                                             className="w-full h-full object-cover"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
 
                                         {/* Ride Name */}
                                         <div className="absolute bottom-0 left-0 right-0 p-4">
-                                            <h3 className="text-white font-black text-[10px] text-center">
+                                            <h3 className="text-white font-black text-sm text-center">
                                                 {attraction.title}
                                             </h3>
                                         </div>
