@@ -75,6 +75,18 @@ const getFallbackImage = (pkg) => {
 
 const TicketPackages = () => {
     const [ticketPackages, setTicketPackages] = useState(defaultPackages);
+    const [scrollOpacity, setScrollOpacity] = useState(0.4);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scroll = window.scrollY;
+            // Map scroll 0-400 to opacity 0.4-0.95
+            const newOpacity = Math.min(0.4 + (scroll / 400) * 0.55, 0.95);
+            setScrollOpacity(newOpacity);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const fetchPackages = async () => {
@@ -105,7 +117,7 @@ const TicketPackages = () => {
     }, []);
 
     return (
-        <div className="relative -mt-28 z-20 px-4 mb-8 pointer-events-none">
+        <div className="relative -mt-24 sm:-mt-28 z-30 px-4 mb-16 pointer-events-none">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pointer-events-auto">
                     {ticketPackages.map((pkg, idx) => (
@@ -118,20 +130,28 @@ const TicketPackages = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: idx * 0.1 }}
                                 whileHover={{ y: -10, scale: 1.02 }}
-                                className={`relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br ${pkg.color} cursor-pointer group h-full`}
+                                className={`relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br ${pkg.color} cursor-pointer group h-full backdrop-blur-sm`}
+                                style={{
+                                    backgroundColor: 'rgba(255, 255, 255, 0.05)'
+                                }}
                             >
                                 {/* Background Image with increased opacity */}
-                                <div className="absolute inset-0 z-0">
+                                <div className="absolute inset-0 z-0 text-white">
                                     <img
                                         src={pkg.image}
                                         alt={pkg.name}
                                         loading="lazy"
-                                        className="w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity duration-300"
+                                        className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300"
                                     />
                                 </div>
 
-                                {/* Gradient Overlay */}
-                                <div className={`absolute inset-0 bg-gradient-to-br ${pkg.color} opacity-75`}></div>
+                                {/* Gradient Overlay - Dynamic Opacity on Mobile */}
+                                <div
+                                    className={`absolute inset-0 bg-gradient-to-br ${pkg.color}`}
+                                    style={{
+                                        opacity: typeof window !== 'undefined' && window.innerWidth < 768 ? scrollOpacity : 0.85
+                                    }}
+                                ></div>
 
                                 {/* Featured Badge */}
                                 {pkg.featured && (
