@@ -69,60 +69,48 @@ const attractionsData = {
     ]
 };
 
-const categories = [
-    { id: 'water', name: 'Water Park', icon: waterSlideIcon, type: 'image' },
-    { id: 'dry', name: 'Dry Park', icon: '🎢', type: 'emoji' }
-];
 
 const AttractionsPreview = () => {
-    const [activeCategory, setActiveCategory] = useState('water');
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(1);
 
-    const currentAttractions = attractionsData[activeCategory];
+    const waterAttractions = attractionsData.water;
+    const dryAttractions = attractionsData.dry;
+    const maxLength = Math.max(waterAttractions.length, dryAttractions.length);
 
     // Fast auto-scroll carousel
     useEffect(() => {
         const timer = setInterval(() => {
-            setStartIndex((prev) => {
-                if (currentAttractions.length > 4) {
-                    return (prev + 1) % currentAttractions.length;
-                }
-                return prev;
-            });
+            setStartIndex((prev) => (prev + 1) % maxLength);
         }, 2000); // Fast - 2 seconds
 
         return () => clearInterval(timer);
-    }, [currentAttractions.length]);
+    }, [maxLength]);
 
     const handlePrev = () => {
-        if (currentAttractions.length > 4) {
-            setDirection(-1);
-            setStartIndex((prev) => (prev - 1 + currentAttractions.length) % currentAttractions.length);
-        }
+        setDirection(-1);
+        setStartIndex((prev) => (prev - 1 + maxLength) % maxLength);
     };
 
     const handleNext = () => {
-        if (currentAttractions.length > 4) {
-            setDirection(1);
-            setStartIndex((prev) => (prev + 1) % currentAttractions.length);
-        }
+        setDirection(1);
+        setStartIndex((prev) => (prev + 1) % maxLength);
     };
 
-    const handleCategoryChange = (categoryId) => {
-        setActiveCategory(categoryId);
-        setStartIndex(0);
-    };
-
-    const getVisibleAttractions = () => {
-        if (currentAttractions.length <= 4) {
-            return currentAttractions;
+    const getVisibleAttractions = (isMobile = false) => {
+        if (isMobile) {
+            return [
+                waterAttractions[startIndex % waterAttractions.length],
+                dryAttractions[startIndex % dryAttractions.length]
+            ];
+        } else {
+            return [
+                waterAttractions[startIndex % waterAttractions.length],
+                waterAttractions[(startIndex + 1) % waterAttractions.length],
+                dryAttractions[startIndex % dryAttractions.length],
+                dryAttractions[(startIndex + 1) % dryAttractions.length]
+            ];
         }
-        const result = [];
-        for (let i = 0; i < 4; i++) {
-            result.push(currentAttractions[(startIndex + i) % currentAttractions.length]);
-        }
-        return result;
     };
 
     return (
@@ -148,68 +136,26 @@ const AttractionsPreview = () => {
                         Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">Attractions</span>
                     </motion.h2>
 
-                    {/* Oval Category Buttons with Unique Animations */}
+                    {/* Category Labels (Read-only now) */}
                     <div className="flex justify-center gap-3 mb-16">
-                        {categories.map((category) => (
-                            <motion.button
-                                key={category.id}
-                                onClick={() => handleCategoryChange(category.id)}
-                                className={`relative flex items-center gap-2.5 px-6 py-3 rounded-full font-bold text-base transition-all duration-300 overflow-hidden ${activeCategory === category.id
-                                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-xl'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 shadow-md'
-                                    }`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                animate={activeCategory === category.id ? {
-                                    boxShadow: [
-                                        '0 10px 30px rgba(251, 189, 8, 0.3)',
-                                        '0 10px 40px rgba(251, 189, 8, 0.5)',
-                                        '0 10px 30px rgba(251, 189, 8, 0.3)',
-                                    ]
-                                } : {}}
-                                transition={{
-                                    boxShadow: {
-                                        duration: 2,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }
-                                }}
-                            >
-                                {/* Ripple effect on active */}
-                                {activeCategory === category.id && (
-                                    <motion.div
-                                        className="absolute inset-0 rounded-full bg-white"
-                                        initial={{ scale: 0, opacity: 0.5 }}
-                                        animate={{ scale: 2, opacity: 0 }}
-                                        transition={{
-                                            duration: 1.5,
-                                            repeat: Infinity,
-                                            ease: "easeOut"
-                                        }}
-                                    />
-                                )}
-
-                                {/* Icon */}
-                                {category.type === 'image' ? (
-                                    <img src={category.icon} alt={category.name} className="w-7 h-7" />
-                                ) : (
-                                    <span className="text-2xl">{category.icon}</span>
-                                )}
-
-                                {/* Text */}
-                                <span className="relative z-10">{category.name}</span>
-                            </motion.button>
-                        ))}
+                        <div className="flex items-center gap-2.5 px-6 py-3 rounded-full font-bold text-base bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-xl">
+                            <img src={waterSlideIcon} alt="Water Park" className="w-7 h-7" />
+                            <span>Water Park</span>
+                        </div>
+                        <div className="flex items-center gap-2.5 px-6 py-3 rounded-full font-bold text-base bg-gradient-to-r from-orange-400 to-orange-600 text-white shadow-xl">
+                            <span className="text-2xl">🎢</span>
+                            <span>Dry Park</span>
+                        </div>
                     </div>
                 </div>
 
-                {/* Desktop Carousel - 4 columns with side-scroll animation */}
+                {/* Desktop Carousel - 4 columns: 2 Water + 2 Dry */}
                 <div className="hidden md:block relative">
                     <div className="grid grid-cols-4 gap-6 mb-8">
                         <AnimatePresence mode="popLayout" custom={direction}>
-                            {getVisibleAttractions().map((attraction, index) => (
+                            {getVisibleAttractions(false).map((attraction, index) => (
                                 <motion.div
-                                    key={`${attraction.id}-${startIndex}`}
+                                    key={`${attraction.id}-${startIndex}-${index}`}
                                     custom={direction}
                                     initial={{
                                         x: direction > 0 ? 300 : -300,
@@ -231,6 +177,11 @@ const AttractionsPreview = () => {
                                     className="group cursor-pointer"
                                 >
                                     <div className="relative h-64 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                                        {/* Category Badge */}
+                                        <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[10px] font-black uppercase text-white shadow-lg ${index < 2 ? 'bg-blue-500/80' : 'bg-orange-500/80'}`}>
+                                            {index < 2 ? 'Water Park' : 'Dry Park'}
+                                        </div>
+
                                         <img
                                             src={attraction.image}
                                             alt={attraction.title}
@@ -251,31 +202,29 @@ const AttractionsPreview = () => {
                     </div>
 
                     {/* Navigation Arrows */}
-                    {currentAttractions.length > 4 && (
-                        <div className="flex justify-center gap-4">
-                            <button
-                                onClick={handlePrev}
-                                className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all hover:scale-110 shadow-lg"
-                            >
-                                <ChevronLeft size={24} strokeWidth={3} />
-                            </button>
-                            <button
-                                onClick={handleNext}
-                                className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all hover:scale-110 shadow-lg"
-                            >
-                                <ChevronRight size={24} strokeWidth={3} />
-                            </button>
-                        </div>
-                    )}
+                    <div className="flex justify-center gap-4">
+                        <button
+                            onClick={handlePrev}
+                            className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all hover:scale-110 shadow-lg"
+                        >
+                            <ChevronLeft size={24} strokeWidth={3} />
+                        </button>
+                        <button
+                            onClick={handleNext}
+                            className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all hover:scale-110 shadow-lg"
+                        >
+                            <ChevronRight size={24} strokeWidth={3} />
+                        </button>
+                    </div>
                 </div>
 
-                {/* Mobile Carousel - 2 columns */}
+                {/* Mobile Carousel - 2 columns: 1 Water + 1 Dry */}
                 <div className="md:hidden">
                     <div className="grid grid-cols-2 gap-4 mb-8">
                         <AnimatePresence mode="popLayout">
-                            {getVisibleAttractions().slice(0, 2).map((attraction, index) => (
+                            {getVisibleAttractions(true).map((attraction, index) => (
                                 <motion.div
-                                    key={`${attraction.id}-${startIndex}`}
+                                    key={`${attraction.id}-${startIndex}-${index}`}
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.8 }}
@@ -287,6 +236,11 @@ const AttractionsPreview = () => {
                                     className="group"
                                 >
                                     <div className="relative h-48 rounded-xl overflow-hidden shadow-lg">
+                                        {/* Category Badge */}
+                                        <div className={`absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-[8px] font-black uppercase text-white shadow-md ${index === 0 ? 'bg-blue-500/80' : 'bg-orange-500/80'}`}>
+                                            {index === 0 ? 'Water' : 'Dry'}
+                                        </div>
+
                                         <img
                                             src={attraction.image}
                                             alt={attraction.title}
@@ -296,7 +250,7 @@ const AttractionsPreview = () => {
 
                                         {/* Ride Name */}
                                         <div className="absolute bottom-0 left-0 right-0 p-4">
-                                            <h3 className="text-white font-black text-sm text-center">
+                                            <h3 className="text-white font-black text-[10px] text-center">
                                                 {attraction.title}
                                             </h3>
                                         </div>
@@ -307,22 +261,20 @@ const AttractionsPreview = () => {
                     </div>
 
                     {/* Mobile Navigation */}
-                    {currentAttractions.length > 2 && (
-                        <div className="flex justify-center gap-4">
-                            <button
-                                onClick={handlePrev}
-                                className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all shadow-lg"
-                            >
-                                <ChevronLeft size={20} />
-                            </button>
-                            <button
-                                onClick={handleNext}
-                                className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all shadow-lg"
-                            >
-                                <ChevronRight size={20} />
-                            </button>
-                        </div>
-                    )}
+                    <div className="flex justify-center gap-4">
+                        <button
+                            onClick={handlePrev}
+                            className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all shadow-lg"
+                        >
+                            <ChevronLeft size={20} />
+                        </button>
+                        <button
+                            onClick={handleNext}
+                            className="bg-wonderla-yellow hover:bg-yellow-400 text-black p-3 rounded-full transition-all shadow-lg"
+                        >
+                            <ChevronRight size={20} />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
