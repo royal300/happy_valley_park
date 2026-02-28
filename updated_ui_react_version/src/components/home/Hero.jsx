@@ -171,18 +171,6 @@ const Hero = () => {
                     <div className="w-1 h-2 bg-white/50 rounded-full"></div>
                 </div>
             </motion.div>
-
-            {/* Wavy Divider - Mobile Only */}
-            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20 md:hidden">
-                <svg
-                    viewBox="0 0 1200 120"
-                    preserveAspectRatio="none"
-                    className="relative block w-[210%] h-[70px] fill-white"
-                    style={{ transform: 'translateX(-5%)' }}
-                >
-                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C58.47,113.88,145.26,125,242,109Z"></path>
-                </svg>
-            </div>
         </div>
     );
 };
