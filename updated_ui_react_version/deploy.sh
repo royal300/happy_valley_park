@@ -20,8 +20,9 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     echo "📂 Navigating to repository root..."
     cd $REMOTE_ROOT
 
-    echo "⬇️  Pulling latest changes from Git..."
-    git pull origin main
+    echo "⬇️  Fetching and Resetting to Git main..."
+    git fetch origin main
+    git reset --hard origin/main
 
     echo "📂 Entering project subdirectory..."
     cd $PROJECT_SUBDIR
