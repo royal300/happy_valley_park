@@ -43,7 +43,7 @@ const Hero = () => {
 
 
     return (
-        <div className="relative h-screen w-full overflow-hidden bg-black">
+        <div className="relative h-[65vh] sm:h-[80vh] md:h-screen w-full overflow-hidden bg-black">
             {/* Background Video - Full Screen Coverage */}
             <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
                 <video
@@ -134,7 +134,7 @@ const Hero = () => {
                         whileTap={{ scale: 0.95 }}
                     >
                         <a
-                            href="https://booking.gohappyvalley.com/client/book"
+                            href="https://booking.gohappyvalley.com/client/dashboard"
                             className="bg-wonderla-yellow text-black font-extrabold px-10 py-4 rounded-full text-base sm:text-lg flex items-center gap-3 hover:bg-yellow-400 transition-all relative overflow-hidden"
                             style={{
                                 boxShadow: '0 0 30px rgba(251, 189, 8, 0.6), 0 0 60px rgba(251, 189, 8, 0.4), 0 0 80px rgba(255, 255, 255, 0.4), 0 0 100px rgba(255, 255, 255, 0.2), 0 4px 20px rgba(0,0,0,0.3)',

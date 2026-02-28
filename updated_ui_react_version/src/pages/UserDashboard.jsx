@@ -93,7 +93,7 @@ const UserDashboard = () => {
                                 <Ticket className="mx-auto text-gray-300 mb-4" size={64} />
                                 <h3 className="text-lg font-semibold text-gray-700">No bookings found</h3>
                                 <p className="text-gray-500 mb-6">You haven't booked any adventures yet.</p>
-                                <button onClick={() => navigate('/book')} className="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-400">Book Now</button>
+                                <a href="https://booking.gohappyvalley.com/client/dashboard" className="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-400">Book Now</a>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -20,7 +20,7 @@ const defaultPackages = [
         discount: "20% OFF",
         price: "₹400",
         icon: Droplets,
-        link: "https://booking.gohappyvalley.com/client/book"
+        link: "https://booking.gohappyvalley.com/client/dashboard"
     },
     {
         id: 2,
@@ -31,7 +31,7 @@ const defaultPackages = [
         price: "₹600",
         icon: Ticket,
         featured: true,
-        link: "https://booking.gohappyvalley.com/client/book"
+        link: "https://booking.gohappyvalley.com/client/dashboard"
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ const defaultPackages = [
         color: "from-orange-500 to-red-600",
         price: "₹200",
         icon: Zap,
-        link: "https://booking.gohappyvalley.com/client/book"
+        link: "https://booking.gohappyvalley.com/client/dashboard"
     },
     {
         id: 4,
@@ -93,7 +93,7 @@ const TicketPackages = () => {
                         price: pkg.price || '',
                         icon: getIconForPackage(pkg),
                         featured: pkg.featured == 1,
-                        link: (pkg.link && !pkg.link.includes('client/dashboard')) ? pkg.link : 'https://booking.gohappyvalley.com/client/book',
+                        link: (pkg.link && !pkg.link.includes('client/dashboard')) ? pkg.link : 'https://booking.gohappyvalley.com/client/dashboard',
                     }));
                     setTicketPackages(mappedPackages);
                 }

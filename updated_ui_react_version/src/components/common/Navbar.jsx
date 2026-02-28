@@ -127,7 +127,7 @@ const Navbar = () => {
                                     <User size={20} />
                                 </a>
                                 <a
-                                    href="https://booking.gohappyvalley.com/client/book"
+                                    href="https://booking.gohappyvalley.com/client/dashboard"
                                     className="bg-wonderla-yellow text-black font-extrabold px-6 py-2.5 rounded-full hover:bg-yellow-400 transition-all shadow-lg hover:shadow-yellow-500/50 flex items-center gap-2 text-sm"
                                 >
                                     <Ticket size={18} />
@@ -232,7 +232,7 @@ const Navbar = () => {
 
                                 <div className="mt-8 space-y-4">
                                     <a
-                                        href="https://booking.gohappyvalley.com/client/book"
+                                        href="https://booking.gohappyvalley.com/client/dashboard"
                                         className="w-full bg-wonderla-yellow text-black font-extrabold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 text-lg active:scale-95 transition-transform"
                                     >
                                         <Ticket size={20} />
