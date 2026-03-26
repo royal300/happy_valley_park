@@ -62,6 +62,8 @@ const Navbar = () => {
         ? 'hover:bg-white/10 text-white'
         : 'hover:bg-gray-100 text-gray-900';
 
+    const noticeText = '🚫 Alcohol consumption and entry under the influence of alcohol are strictly prohibited inside the park  •  🚫 Outside food is not allowed  •  👕 Only synthetic clothing is permitted in the water park';
+
     return (
         <>
             <nav
@@ -148,6 +150,37 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Scrolling Notice Bar */}
+                <AnimatePresence>
+                    {scrolled && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="bg-red-600 border-t border-red-500 overflow-hidden"
+                        >
+                            <div className="relative flex whitespace-nowrap py-2">
+                                <div className="animate-marquee whitespace-nowrap">
+                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                        {noticeText}
+                                    </span>
+                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                        {noticeText}
+                                    </span>
+                                </div>
+                                <div className="animate-marquee whitespace-nowrap">
+                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                        {noticeText}
+                                    </span>
+                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                        {noticeText}
+                                    </span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </nav>
 
             {/* Mobile Sidebar (Drawer) */}

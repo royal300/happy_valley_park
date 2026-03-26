@@ -35,7 +35,7 @@ const WaterWorld = () => {
                             Dive into a world of coolness and fun. The best water park experience in West Bengal.
                         </motion.p>
                         <motion.a
-                            href="https://happyvalley.royal300.com/client/book"
+                            href="https://booking.gohappyvalley.com/client/dashboard"
                             initial={{ y: 30, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.4 }}
