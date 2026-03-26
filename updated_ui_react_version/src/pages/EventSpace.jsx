@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '../components/common/ScrollReveal';
 
 // Event Space Images
-import img1 from '../assets/Events Space/LMC_20260312_185543_🔥 iPhone 15 Ultra Pixel.jpg.jpeg';
-import img2 from '../assets/Events Space/LMC_20260312_185919_🔥 iPhone 15 Ultra Pixel.jpg.jpeg';
-import img3 from '../assets/Events Space/LMC_20260312_192456_🔥 iPhone 15 Ultra Pixel.NIGHT.jpg.jpeg';
-import img4 from '../assets/Events Space/LMC_20260312_192248_🔥 iPhone 15 Ultra Pixel.NIGHT.jpg.jpeg';
-import img5 from '../assets/Events Space/LMC_20260312_170029_🔥 iPhone 15 Ultra Pixel.NIGHT.jpg.jpeg';
+import img1 from '../assets/Events Space/img2.jpg';
+import img2 from '../assets/Events Space/img3.jpg';
+import img3 from '../assets/Events Space/img5.jpg';
+import img4 from '../assets/Events Space/img4.jpg';
+import img5 from '../assets/Events Space/img1.jpg';
 
 const EventSpace = () => {
     const eventImages = [

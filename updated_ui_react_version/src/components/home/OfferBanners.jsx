@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const OfferBanners = () => {
     const displayOffers = [
         { id: 'f1', title: 'Dry Park Offer', image_url: '/dry_park_poster_final.jpg' },
-        { id: 'f2', title: 'Water Park Offer', image_url: '/water_park_poster_final.jpg' }
+        { id: 'f2', title: 'Water Park Offer', image_url: '/water_park_poster_final.png' }
     ];
 
     return (
