@@ -40,7 +40,8 @@ const Navbar = () => {
                 { name: 'Water Park', path: '/waterworld' },
                 { name: 'Garden', path: '/garden' },
                 { name: 'Resort', path: '/resort' },
-                { name: 'Picnic Spot', path: '/picnic-spot' }
+                { name: 'Picnic Spot', path: '/picnic-spot' },
+                { name: 'Event Space', path: '/event-space' }
             ]
         },
         { name: 'About', path: '/about', icon: Info },

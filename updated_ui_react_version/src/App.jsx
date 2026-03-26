@@ -22,6 +22,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Resort = lazy(() => import('./pages/Resort'));
 const PicnicSpot = lazy(() => import('./pages/PicnicSpot'));
 const Garden = lazy(() => import('./pages/Garden'));
+const EventSpace = lazy(() => import('./pages/EventSpace'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/resort" element={<Resort />} />
           <Route path="/picnic-spot" element={<PicnicSpot />} />
           <Route path="/garden" element={<Garden />} />
+          <Route path="/event-space" element={<EventSpace />} />
         </Route>
         <Route path="/admin" element={<FrontendAdminLogin />} />
         <Route path="/admin/dashboard" element={<FrontendAdminDashboard />} />

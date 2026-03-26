@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 
 const AttractionHighlights = () => {
     const attractions = [
-        { id: 1, image_url: '/india_gate_poster.png' },
-        { id: 2, image_url: '/pool_wave_poster.jpg' }
+        { id: 1, image_url: '/pool_wave_poster.png' },
+        { id: 2, image_url: '/india_gate_poster.png' },
+        { id: 3, image_url: '/water_park_poster_final.png' }
     ];
     return (
         <section className="container mx-auto px-4 py-12">
@@ -17,7 +18,7 @@ const AttractionHighlights = () => {
                 </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {attractions.length > 0 ? (
                     attractions.map((attraction, index) => (
                         <motion.div
