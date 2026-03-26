@@ -158,22 +158,22 @@ const Navbar = () => {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="bg-red-600 border-t border-red-500 overflow-hidden"
+                            className="bg-red-600 border-t border-white/10 overflow-hidden"
                         >
-                            <div className="relative flex whitespace-nowrap py-2">
+                            <div className="relative flex whitespace-nowrap py-1">
                                 <div className="animate-marquee whitespace-nowrap">
-                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                    <span className="text-yellow-300 font-bold text-xs uppercase tracking-wider mx-3">
                                         {noticeText}
                                     </span>
-                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                    <span className="text-yellow-300 font-bold text-xs uppercase tracking-wider mx-3">
                                         {noticeText}
                                     </span>
                                 </div>
                                 <div className="animate-marquee whitespace-nowrap">
-                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                    <span className="text-yellow-300 font-bold text-xs uppercase tracking-wider mx-3">
                                         {noticeText}
                                     </span>
-                                    <span className="text-yellow-300 font-bold text-sm uppercase tracking-wider mx-4">
+                                    <span className="text-yellow-300 font-bold text-xs uppercase tracking-wider mx-3">
                                         {noticeText}
                                     </span>
                                 </div>
