@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion } from 'framer-motion';
 
 const AttractionHighlights = () => {
-    const attractions = [
-        { id: 1, image_url: '/pool_wave_poster.png' },
-        { id: 2, image_url: '/india_gate_poster.png' }
-    ];
+    const [attractions, setAttractions] = useState([]);
+
+    useEffect(() => {
+        const fetchAttractions = async () => {
+            try {
+                const apiUrl = '/backend/api/attractions.php';
+                const response = await axios.get(apiUrl);
+                if (Array.isArray(response.data)) {
+                    setAttractions(response.data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch attractions');
+            }
+        };
+        fetchAttractions();
+    }, []);
     return (
         <section className="container mx-auto px-4 py-12">
             <div className="max-w-7xl mx-auto px-4 mb-12 text-center">

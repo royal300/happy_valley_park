@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion } from 'framer-motion';
 
 const OfferBanners = () => {
-    const displayOffers = [
-        { id: 'f1', title: 'Dry Park Offer', image_url: '/dry_park_poster_final.jpg' },
-        { id: 'f2', title: 'Water Park Offer', image_url: '/water_park_poster_final.png' }
-    ];
+    const [offers, setOffers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchOffers = async () => {
+            try {
+                const apiUrl = '/backend/api/offers.php';
+                const response = await axios.get(apiUrl);
+                if (Array.isArray(response.data) && response.data.length > 0) {
+                    setOffers(response.data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch offers');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchOffers();
+    }, []);
+
+    const displayOffers = offers;
+
+    if (loading) return null;
 
     return (
         <section className="container mx-auto px-4 py-12">
