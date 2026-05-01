@@ -48,6 +48,7 @@ const AttractionHighlights = () => {
                                 loop
                                 muted
                                 playsInline
+                                preload="metadata"
                             />
                         </motion.div>
                     ))

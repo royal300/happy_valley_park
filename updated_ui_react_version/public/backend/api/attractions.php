@@ -67,10 +67,24 @@ if ($method === 'GET') {
         return file_exists($destination);
     }
 
+    function compressVideo($source, $destination) {
+        $cmd = "ffmpeg -y -i " . escapeshellarg($source) . " -vf scale=-2:720 -c:v libx264 -crf 28 -preset veryfast -c:a aac -b:a 128k " . escapeshellarg($destination) . " 2>&1";
+        exec($cmd, $output, $return_var);
+        return $return_var === 0;
+    }
+
     $isVideo = in_array($ext, ['mp4', 'webm', 'ogg', 'avi', 'mov']);
     $uploadSuccess = false;
     if ($isVideo) {
-        $uploadSuccess = move_uploaded_file($file['tmp_name'], $targetPath);
+        $compressedFileName = 'opt_' . pathinfo($fileName, PATHINFO_FILENAME) . '.mp4';
+        $compressedPath = $uploadDir . $compressedFileName;
+        if (compressVideo($file['tmp_name'], $compressedPath)) {
+            $uploadSuccess = true;
+            $fileName = $compressedFileName;
+            $targetPath = $compressedPath;
+        } else {
+            $uploadSuccess = move_uploaded_file($file['tmp_name'], $targetPath);
+        }
     } else {
         $uploadSuccess = compressImage($file['tmp_name'], $targetPath, 60);
     }

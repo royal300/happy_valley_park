@@ -41,6 +41,15 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     echo "📦 Installing dependencies..."
     npm install
 
+    echo "⚙️  Ensuring FFmpeg is installed for video compression..."
+    if ! command -v ffmpeg &> /dev/null; then
+        echo "   ℹ️ FFmpeg not found, installing..."
+        apt-get update
+        apt-get install -y ffmpeg
+    else
+        echo "   ✅ FFmpeg is already installed."
+    fi
+
     echo "🏗️  Building the project..."
     npm run build
 
