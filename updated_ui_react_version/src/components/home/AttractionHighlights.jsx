@@ -41,10 +41,13 @@ const AttractionHighlights = () => {
                             transition={{ duration: 0.5, delay: index * 0.2 }}
                             className="group relative w-full overflow-hidden rounded-2xl shadow-xl cursor-pointer"
                         >
-                            <img
+                            <video
                                 src={attraction.image_url}
-                                alt="Event"
                                 className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
                             />
                         </motion.div>
                     ))

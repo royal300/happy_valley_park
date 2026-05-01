@@ -27,13 +27,13 @@ const AttractionManager = () => {
         const file = fileInput.files[0];
 
         if (!file) {
-            alert('Please select an image');
+            alert('Please select a video');
             return;
         }
 
         const formData = new FormData();
         formData.append('image', file);
-        formData.append('title', 'Event Image');
+        formData.append('title', 'Event Video');
 
         setUploading(true);
         try {
@@ -73,7 +73,7 @@ const AttractionManager = () => {
                     <input
                         id="attractionImage"
                         type="file"
-                        accept="image/*"
+                        accept="video/*"
                         className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-blue-600 file:text-white hover:file:bg-blue-700"
                     />
                     <button
@@ -91,10 +91,13 @@ const AttractionManager = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {attractions.map((attraction) => (
                     <div key={attraction.id} className="relative group rounded-xl overflow-hidden shadow-lg bg-white">
-                        <img
+                        <video
                             src={attraction.image_url}
-                            alt="Event"
                             className="w-full h-48 object-cover"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
                         />
                         <button
                             onClick={() => handleDelete(attraction.id)}

@@ -33,11 +33,11 @@ if ($method === 'GET') {
     $fileName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', basename($file['name']));
     $targetPath = $uploadDir . $fileName;
 
-    $allowedExts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+    $allowedExts = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'mp4', 'webm', 'ogg', 'avi', 'mov'];
     $ext = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
     if (!in_array($ext, $allowedExts)) {
         http_response_code(400);
-        echo json_encode(['error' => 'Invalid file type. Allowed: jpg, png, webp, gif']);
+        echo json_encode(['error' => 'Invalid file type. Allowed: jpg, png, webp, gif, mp4, webm, ogg, avi, mov']);
         exit;
     }
 
@@ -67,7 +67,15 @@ if ($method === 'GET') {
         return file_exists($destination);
     }
 
-    if (compressImage($file['tmp_name'], $targetPath, 60)) {
+    $isVideo = in_array($ext, ['mp4', 'webm', 'ogg', 'avi', 'mov']);
+    $uploadSuccess = false;
+    if ($isVideo) {
+        $uploadSuccess = move_uploaded_file($file['tmp_name'], $targetPath);
+    } else {
+        $uploadSuccess = compressImage($file['tmp_name'], $targetPath, 60);
+    }
+
+    if ($uploadSuccess) {
         $imageUrl = '/backend/api/uploads/attractions/' . $fileName;
         $title = $_POST['title'] ?? 'New Attraction';
 
