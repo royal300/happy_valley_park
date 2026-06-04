@@ -18,7 +18,7 @@ import WelcomePopup from '../components/home/WelcomePopup';
 
 const Home = () => {
     return (
-        <div className="bg-white">
+        <div>
             <WelcomePopup />
             <Hero />
 
@@ -47,7 +47,7 @@ const Home = () => {
 
             {/* Resort & Facilities Section */}
             <ScrollReveal delay={0.2}>
-                <section className="py-12 bg-white">
+                <section className="py-12">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
                             <p className="text-yellow-600 font-black uppercase tracking-[0.3em] text-base mb-2">

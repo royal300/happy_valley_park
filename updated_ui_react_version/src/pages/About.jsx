@@ -4,7 +4,7 @@ import aboutImg from '../assets/images/resort.jpg';
 
 const About = () => {
     return (
-        <div className="pt-40 pb-16 px-4 sm:px-6 lg:px-8 bg-white min-h-screen">
+        <div className="pt-40 pb-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
                 <motion.h1
                     initial={{ y: 20, opacity: 0 }}
