@@ -12,7 +12,7 @@ $host = getenv('DB_HOST') ?: 'localhost';
 $port = getenv('DB_PORT') ?: '3306';
 $db   = getenv('DB_NAME') ?: 'happyvalley_frontend';
 $user = getenv('DB_USER') ?: 'root';
-$pass = getenv('DB_PASS') ?: 'Happy@Valley#2026';
+$pass = getenv('DB_PASS') ?: 'x1lZmHdSaW2DbdTdY/YGUPATwI8K';
 
 $charset = 'utf8mb4';
 

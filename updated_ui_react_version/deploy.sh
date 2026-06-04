@@ -17,6 +17,12 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     BACKEND_DIR="$DIST_DIR/backend/api"
     UPLOADS_DIR="$BACKEND_DIR/uploads"
 
+    # ---- DB Credentials ----
+    DB_USER="root"
+    DB_PASS='x1lZmHdSaW2DbdTdY/YGUPATwI8K'
+    DB_NAME="happyvalley_frontend"
+    DB_HOST="localhost"
+
     echo "📂 Navigating to repository root..."
     cd $REMOTE_ROOT
 
@@ -69,6 +75,54 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     mkdir -p $UPLOADS_DIR/attractions
     mkdir -p $UPLOADS_DIR/offers
 
+    # ---- Inject DB credentials into db.php (overrides git version) ----
+    echo "🔑 Injecting DB credentials into backend..."
+    DB_PHP_FILE="$BACKEND_DIR/db.php"
+    cat > $DB_PHP_FILE << DBEOF
+<?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+
+if (\$_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+\$host = '${DB_HOST}';
+\$port = '3306';
+\$db   = '${DB_NAME}';
+\$user = '${DB_USER}';
+\$pass = '${DB_PASS}';
+
+\$charset = 'utf8mb4';
+
+\$dsn = "mysql:host=\$host;dbname=\$db;charset=\$charset;port=\$port";
+\$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    \$pdo = new PDO(\$dsn, \$user, \$pass, \$options);
+} catch (\PDOException \$e) {
+    \$pdo = null;
+    error_log("Database connection failed: " . \$e->getMessage());
+}
+?>
+DBEOF
+    echo "   ✅ db.php credentials injected."
+
+    # ---- Verify DB connection ----
+    echo "🔍 Verifying MySQL DB connection..."
+    if mysql -u"$DB_USER" -p"$DB_PASS" -e "USE $DB_NAME;" 2>/dev/null; then
+        echo "   ✅ DB connection successful — $DB_NAME is accessible."
+    else
+        echo "   ⚠️  WARNING: Could not connect to DB '$DB_NAME' with provided credentials."
+        echo "   Check that the MySQL user '$DB_USER' has access to '$DB_NAME'."
+    fi
+
     # ---- Set permissions ----
     echo "🔐 Setting file permissions..."
     chown -R www-data:www-data $DIST_DIR/backend
@@ -80,4 +134,5 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     echo "✅ Deployment complete!"
     echo "   📌 Backend API: /backend/api/"
     echo "   📂 Uploads: $UPLOADS_DIR"
+    echo "   🗄️  DB: $DB_NAME @ $DB_HOST (user: $DB_USER)"
 EOF
