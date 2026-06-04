@@ -33,15 +33,24 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     echo "📂 Entering project subdirectory..."
     cd $PROJECT_SUBDIR
 
+    # ---- Ensure persistent uploads directory exists ----
+    PERSISTENT_UPLOADS="$REMOTE_ROOT/persistent_uploads"
+    echo "📁 Ensuring persistent uploads directory exists at $PERSISTENT_UPLOADS..."
+    mkdir -p $PERSISTENT_UPLOADS/hero
+    mkdir -p $PERSISTENT_UPLOADS/attractions
+    mkdir -p $PERSISTENT_UPLOADS/offers
+
     # ---- Preserve existing uploads before build ----
-    echo "💾 Backing up existing uploads..."
-    BACKUP_DIR="/tmp/hvp_uploads_backup"
-    if [ -d "$UPLOADS_DIR" ]; then
-        rm -rf $BACKUP_DIR
-        cp -r $UPLOADS_DIR $BACKUP_DIR
-        echo "   ✅ Uploads backed up to $BACKUP_DIR"
-    else
-        echo "   ℹ️  No existing uploads to backup"
+    echo "💾 Checking for existing uploads to migrate..."
+    if [ -d "$UPLOADS_DIR" ] && [ ! -L "$UPLOADS_DIR" ]; then
+        echo "   🔄 Migrating old uploads to persistent storage..."
+        cp -rn $UPLOADS_DIR/* $PERSISTENT_UPLOADS/ 2>/dev/null || true
+    fi
+    
+    # Check if there's a nested backup from a previous bad deploy that we need to recover
+    if [ -d "$UPLOADS_DIR/hvp_uploads_backup" ]; then
+        echo "   🔄 Recovering nested uploads from previous deploy..."
+        cp -rn $UPLOADS_DIR/hvp_uploads_backup/* $PERSISTENT_UPLOADS/ 2>/dev/null || true
     fi
 
     echo "📦 Installing dependencies..."
@@ -59,21 +68,16 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     echo "🏗️  Building the project..."
     npm run build
 
-    # ---- Restore uploads after build ----
+    # ---- Link persistent uploads after build ----
     echo "📁 Ensuring backend API directory exists..."
     mkdir -p $BACKEND_DIR
 
-    if [ -d "$BACKUP_DIR" ]; then
-        echo "🔄 Restoring uploads..."
-        cp -r $BACKUP_DIR $UPLOADS_DIR
-        echo "   ✅ Uploads restored"
-        rm -rf $BACKUP_DIR
-    fi
-
-    # ---- Ensure upload directories exist ----
-    mkdir -p $UPLOADS_DIR/hero
-    mkdir -p $UPLOADS_DIR/attractions
-    mkdir -p $UPLOADS_DIR/offers
+    echo "🔗 Linking persistent uploads to dist..."
+    # Remove the empty/default uploads dir created by the build
+    rm -rf $UPLOADS_DIR
+    # Create symlink
+    ln -s $PERSISTENT_UPLOADS $UPLOADS_DIR
+    echo "   ✅ Uploads linked successfully"
 
     # ---- Inject DB credentials into db.php (overrides git version) ----
     echo "🔑 Injecting DB credentials into backend..."

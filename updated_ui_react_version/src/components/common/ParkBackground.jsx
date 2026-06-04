@@ -150,52 +150,66 @@ const ICONS = [
   WaterSlideIcon,     // 8
 ];
 
-// Deterministic scatter — 30 items spread across 0–100% of the page height
+// Deterministic scatter — 50 items spread across 0–100% of the page height
 // top/left are percentages relative to the absolute container (inset-0 in main)
 const ITEMS = [
   // ── Top band (0–15%) ──
-  { type: 0, top: '1%',  left: '2%',  size: 92, rotate: -8,  opacity: 0.06 },
-  { type: 1, top: '5%',  left: '88%', size: 74, rotate: 22,  opacity: 0.055 },
-  { type: 4, top: '3%',  left: '62%', size: 56, rotate: 12,  opacity: 0.065 },
-  { type: 5, top: '10%', left: '32%', size: 50, rotate: 30,  opacity: 0.06 },
+  { type: 0, top: '2%',  left: '4%',  size: 92, rotate: -8,  opacity: 0.12 },
+  { type: 1, top: '5%',  left: '88%', size: 74, rotate: 22,  opacity: 0.11 },
+  { type: 4, top: '3%',  left: '62%', size: 56, rotate: 12,  opacity: 0.13 },
+  { type: 5, top: '10%', left: '32%', size: 50, rotate: 30,  opacity: 0.12 },
+  { type: 7, top: '8%',  left: '18%', size: 45, rotate: -15, opacity: 0.11 },
+  { type: 3, top: '12%', left: '75%', size: 85, rotate: 5,   opacity: 0.12 },
 
   // ── Upper-mid band (15–32%) ──
-  { type: 6, top: '16%', left: '18%', size: 88, rotate: -5,  opacity: 0.05 },
-  { type: 7, top: '20%', left: '72%', size: 68, rotate: 0,   opacity: 0.05 },
-  { type: 2, top: '27%', left: '8%',  size: 86, rotate: 4,   opacity: 0.055 },
-  { type: 3, top: '30%', left: '84%', size: 92, rotate: -18, opacity: 0.05 },
-  { type: 8, top: '25%', left: '46%', size: 70, rotate: 18,  opacity: 0.055 },
+  { type: 6, top: '16%', left: '18%', size: 88, rotate: -5,  opacity: 0.11 },
+  { type: 7, top: '20%', left: '72%', size: 68, rotate: 0,   opacity: 0.11 },
+  { type: 2, top: '27%', left: '8%',  size: 86, rotate: 4,   opacity: 0.12 },
+  { type: 3, top: '30%', left: '84%', size: 92, rotate: -18, opacity: 0.11 },
+  { type: 8, top: '25%', left: '46%', size: 70, rotate: 18,  opacity: 0.12 },
+  { type: 4, top: '18%', left: '38%', size: 55, rotate: 25,  opacity: 0.13 },
+  { type: 1, top: '22%', left: '92%', size: 65, rotate: -10, opacity: 0.12 },
 
   // ── Mid band (32–50%) ──
-  { type: 0, top: '36%', left: '60%', size: 82, rotate: 8,   opacity: 0.05 },
-  { type: 1, top: '42%', left: '22%', size: 70, rotate: -28, opacity: 0.06 },
-  { type: 4, top: '46%', left: '78%', size: 52, rotate: -12, opacity: 0.065 },
-  { type: 6, top: '50%', left: '42%', size: 96, rotate: 0,   opacity: 0.045 },
+  { type: 0, top: '36%', left: '60%', size: 82, rotate: 8,   opacity: 0.11 },
+  { type: 1, top: '42%', left: '22%', size: 70, rotate: -28, opacity: 0.12 },
+  { type: 4, top: '46%', left: '78%', size: 52, rotate: -12, opacity: 0.13 },
+  { type: 6, top: '50%', left: '42%', size: 96, rotate: 0,   opacity: 0.10 },
+  { type: 5, top: '34%', left: '12%', size: 48, rotate: 15,  opacity: 0.12 },
+  { type: 8, top: '40%', left: '88%', size: 75, rotate: -20, opacity: 0.11 },
+  { type: 2, top: '48%', left: '5%',  size: 80, rotate: 12,  opacity: 0.12 },
 
   // ── Lower-mid band (50–68%) ──
-  { type: 7, top: '54%', left: '5%',  size: 62, rotate: 6,   opacity: 0.05 },
-  { type: 2, top: '60%', left: '68%', size: 80, rotate: 0,   opacity: 0.055 },
-  { type: 5, top: '64%', left: '30%', size: 58, rotate: -18, opacity: 0.06 },
-  { type: 3, top: '67%', left: '88%', size: 86, rotate: 22,  opacity: 0.05 },
-  { type: 8, top: '62%', left: '52%', size: 66, rotate: -4,  opacity: 0.055 },
+  { type: 7, top: '54%', left: '5%',  size: 62, rotate: 6,   opacity: 0.11 },
+  { type: 2, top: '60%', left: '68%', size: 80, rotate: 0,   opacity: 0.12 },
+  { type: 5, top: '64%', left: '30%', size: 58, rotate: -18, opacity: 0.12 },
+  { type: 3, top: '67%', left: '88%', size: 86, rotate: 22,  opacity: 0.11 },
+  { type: 8, top: '62%', left: '52%', size: 66, rotate: -4,  opacity: 0.12 },
+  { type: 0, top: '52%', left: '28%', size: 90, rotate: -10, opacity: 0.11 },
+  { type: 4, top: '56%', left: '82%', size: 55, rotate: 5,   opacity: 0.13 },
 
   // ── Lower band (68–85%) ──
-  { type: 1, top: '72%', left: '14%', size: 68, rotate: -24, opacity: 0.06 },
-  { type: 0, top: '76%', left: '55%', size: 90, rotate: -6,  opacity: 0.05 },
-  { type: 4, top: '80%', left: '88%', size: 54, rotate: -6,  opacity: 0.065 },
-  { type: 6, top: '84%', left: '36%', size: 92, rotate: -4,  opacity: 0.045 },
+  { type: 1, top: '72%', left: '14%', size: 68, rotate: -24, opacity: 0.12 },
+  { type: 0, top: '76%', left: '55%', size: 90, rotate: -6,  opacity: 0.11 },
+  { type: 4, top: '80%', left: '88%', size: 54, rotate: -6,  opacity: 0.13 },
+  { type: 6, top: '84%', left: '36%', size: 92, rotate: -4,  opacity: 0.10 },
+  { type: 7, top: '70%', left: '42%', size: 60, rotate: 18,  opacity: 0.12 },
+  { type: 3, top: '78%', left: '8%',  size: 85, rotate: -15, opacity: 0.11 },
+  { type: 8, top: '82%', left: '72%', size: 70, rotate: 8,   opacity: 0.12 },
 
   // ── Bottom band (85–100%) ──
-  { type: 7, top: '88%', left: '8%',  size: 64, rotate: 0,   opacity: 0.05 },
-  { type: 5, top: '91%', left: '65%', size: 60, rotate: 28,  opacity: 0.06 },
-  { type: 2, top: '94%', left: '80%', size: 82, rotate: -12, opacity: 0.055 },
-  { type: 3, top: '96%', left: '24%', size: 88, rotate: 16,  opacity: 0.05 },
-  { type: 8, top: '98%', left: '50%', size: 68, rotate: 0,   opacity: 0.055 },
+  { type: 7, top: '88%', left: '8%',  size: 64, rotate: 0,   opacity: 0.11 },
+  { type: 5, top: '91%', left: '65%', size: 60, rotate: 28,  opacity: 0.12 },
+  { type: 2, top: '94%', left: '80%', size: 82, rotate: -12, opacity: 0.12 },
+  { type: 3, top: '96%', left: '24%', size: 88, rotate: 16,  opacity: 0.11 },
+  { type: 8, top: '98%', left: '50%', size: 68, rotate: 0,   opacity: 0.12 },
+  { type: 1, top: '86%', left: '92%', size: 75, rotate: 20,  opacity: 0.11 },
+  { type: 4, top: '92%', left: '40%', size: 50, rotate: -25, opacity: 0.13 },
 
   // ── Extra items between bands to fill gaps ──
-  { type: 5, top: '13%', left: '55%', size: 46, rotate: -5,  opacity: 0.055 },
-  { type: 7, top: '38%', left: '36%', size: 62, rotate: 10,  opacity: 0.05 },
-  { type: 4, top: '58%', left: '22%', size: 50, rotate: 20,  opacity: 0.065 },
+  { type: 5, top: '13%', left: '55%', size: 46, rotate: -5,  opacity: 0.12 },
+  { type: 7, top: '38%', left: '36%', size: 62, rotate: 10,  opacity: 0.11 },
+  { type: 4, top: '58%', left: '22%', size: 50, rotate: 20,  opacity: 0.13 },
 ];
 
 /* ─────────────────────────────────────────────
