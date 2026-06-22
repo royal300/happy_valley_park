@@ -1,14 +1,20 @@
 #!/bin/bash
 
 # Configuration
-VPS_USER="root"
-VPS_IP="187.77.184.151"
+VPS_USER="${DEPLOY_USER}"
+VPS_IP="${DEPLOY_HOST}"
+
+# DB Credentials injected from env
+DB_USER="${DEPLOY_DB_USER}"
+DB_PASS="${DEPLOY_DB_PASS}"
+DB_NAME="${DEPLOY_DB_NAME}"
+DB_HOST="${DEPLOY_DB_HOST}"
 REMOTE_ROOT="/var/www/happyvalley_frontend"
 PROJECT_SUBDIR="updated_ui_react_version"
 
 echo "🚀 Starting deployment to $VPS_USER@$VPS_IP..."
 
-ssh $VPS_USER@$VPS_IP << 'EOF'
+ssh $VPS_USER@$VPS_IP "DB_USER='${DB_USER}' DB_PASS='${DB_PASS}' DB_NAME='${DB_NAME}' DB_HOST='${DB_HOST}' bash -s" << 'EOF'
     set -e # Stop script on error
 
     REMOTE_ROOT="/var/www/happyvalley_frontend"
@@ -18,10 +24,7 @@ ssh $VPS_USER@$VPS_IP << 'EOF'
     UPLOADS_DIR="$BACKEND_DIR/uploads"
 
     # ---- DB Credentials ----
-    DB_USER="root"
-    DB_PASS='x1lZmHdSaW2DbdTdY/YGUPATwI8K'
-    DB_NAME="happyvalley_frontend"
-    DB_HOST="localhost"
+    # Inherited from ssh wrapper environment variables
 
     echo "📂 Navigating to repository root..."
     cd $REMOTE_ROOT

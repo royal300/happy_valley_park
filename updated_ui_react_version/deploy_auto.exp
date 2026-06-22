@@ -3,9 +3,9 @@
 
 # Configuration
 set timeout 300
-set host "187.77.184.151"
-set user "root"
-set password "Royal300@2026"
+set host $env(DEPLOY_HOST)
+set user $env(DEPLOY_USER)
+set password $env(DEPLOY_PASSWORD)
 set script "./deploy.sh"
 
 spawn $script
