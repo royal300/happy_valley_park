@@ -1,7 +1,15 @@
+#!/bin/bash
 
-#!/usr/bin/expect
+# Auto-load the deployment secrets
+if [ -f ".env.deploy" ]; then
+    source .env.deploy
+else
+    echo "❌ Error: .env.deploy file not found! Please create it with your credentials."
+    exit 1
+fi
 
-# Configuration
+# Run the expect script to automate SSH password entry
+expect << 'EOF'
 set timeout 300
 set host $env(DEPLOY_HOST)
 set user $env(DEPLOY_USER)
@@ -23,3 +31,4 @@ expect {
 }
 
 puts "\n🎉 Deployment finished!"
+EOF
