@@ -4,7 +4,15 @@ header('Content-Type: application/json');
 
 $uploadDir = __DIR__ . '/uploads/offers/';
 if (!file_exists($uploadDir)) {
-    mkdir($uploadDir, 0777, true);
+    if (!mkdir($uploadDir, 0777, true)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Failed to create upload directory. Check server permissions.']);
+        exit;
+    }
+}
+// Ensure directory is writable
+if (!is_writable($uploadDir)) {
+    chmod($uploadDir, 0777);
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -42,33 +50,51 @@ if ($method === 'GET') {
         exit;
     }
 
-    // Compress helper function
+    // Compress helper function — uses copy()+unlink() as fallback (safe inside functions)
     function compressImage($source, $destination, $quality) {
-        $info = getimagesize($source);
-        if ($info['mime'] == 'image/jpeg') {
+        $info = @getimagesize($source);
+        $mime = $info ? $info['mime'] : '';
+
+        $compressed = false;
+        if ($mime === 'image/jpeg' && function_exists('imagecreatefromjpeg')) {
             $image = @imagecreatefromjpeg($source);
-            if ($image) { imagejpeg($image, $destination, $quality); imagedestroy($image); }
-            else { move_uploaded_file($source, $destination); }
-        } elseif ($info['mime'] == 'image/png') {
+            if ($image) {
+                $compressed = imagejpeg($image, $destination, $quality);
+                imagedestroy($image);
+            }
+        } elseif ($mime === 'image/png' && function_exists('imagecreatefrompng')) {
             $image = @imagecreatefrompng($source);
-            if ($image) { 
+            if ($image) {
                 imagealphablending($image, false);
                 imagesavealpha($image, true);
-                $pngQuality = round(($quality/100) * 9);
-                imagepng($image, $destination, 9 - $pngQuality); 
-                imagedestroy($image); 
-            } else { move_uploaded_file($source, $destination); }
-        } elseif ($info['mime'] == 'image/webp') {
+                $pngQuality = max(0, min(9, 9 - round(($quality / 100) * 9)));
+                $compressed = imagepng($image, $destination, $pngQuality);
+                imagedestroy($image);
+            }
+        } elseif ($mime === 'image/webp' && function_exists('imagecreatefromwebp')) {
             $image = @imagecreatefromwebp($source);
-            if ($image) { imagewebp($image, $destination, $quality); imagedestroy($image); }
-            else { move_uploaded_file($source, $destination); }
-        } else {
-            move_uploaded_file($source, $destination);
+            if ($image) {
+                $compressed = imagewebp($image, $destination, $quality);
+                imagedestroy($image);
+            }
         }
-        return file_exists($destination);
+
+        // Fallback: plain file copy if GD compression failed or unsupported mime
+        if (!$compressed || !file_exists($destination)) {
+            $compressed = @copy($source, $destination);
+        }
+
+        return $compressed && file_exists($destination);
     }
 
-    if (compressImage($file['tmp_name'], $targetPath, 60)) {
+    $compressed = compressImage($file['tmp_name'], $targetPath, 60);
+
+    // Last-resort fallback: try move_uploaded_file directly
+    if (!$compressed) {
+        $compressed = move_uploaded_file($file['tmp_name'], $targetPath);
+    }
+
+    if ($compressed) {
         $imageUrl = '/backend/api/uploads/offers/' . $fileName;
         $title = $_POST['title'] ?? 'Offer Banner';
 
