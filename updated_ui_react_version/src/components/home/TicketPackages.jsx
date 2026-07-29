@@ -175,12 +175,12 @@ const TicketPackages = () => {
                                     )}
 
                                     {!isAvailable && (
-                                        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 pointer-events-none transform rotate-12">
-                                            <div className="p-1 bg-white/95 backdrop-blur-md rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.4)] border-2 border-white">
+                                        <div className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 z-20 pointer-events-none transform rotate-12">
+                                            <div className="p-0.5 sm:p-1 bg-white/95 backdrop-blur-md rounded-full shadow-[0_6px_16px_rgba(0,0,0,0.4)] border-2 border-white">
                                                 <img
                                                     src={naBadge}
                                                     alt="Not Available"
-                                                    className="w-14 sm:w-16 md:w-18 h-auto object-contain block"
+                                                    className="w-12 sm:w-14 md:w-16 h-auto object-contain block"
                                                 />
                                             </div>
                                         </div>
