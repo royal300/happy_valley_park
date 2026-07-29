@@ -179,7 +179,7 @@ const TicketPackages = () => {
                                             <img
                                                 src={naBadge}
                                                 alt="Not Available"
-                                                className="w-20 sm:w-24 md:w-28 h-auto transform rotate-12 drop-shadow-2xl"
+                                                className="w-16 sm:w-18 md:w-22 h-auto transform rotate-12 drop-shadow-2xl"
                                             />
                                         </div>
                                     )}
