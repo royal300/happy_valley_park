@@ -8,23 +8,27 @@ else
     exit 1
 fi
 
-# Run the expect script to automate SSH password entry
-expect << 'EOF'
-set timeout 300
-set host $env(DEPLOY_HOST)
-set user $env(DEPLOY_USER)
-set password $env(DEPLOY_PASSWORD)
-set script "./deploy.sh"
+# Export all vars so expect can read them via $env()
+export DEPLOY_USER DEPLOY_HOST DEPLOY_PASSWORD DEPLOY_DB_USER DEPLOY_DB_PASS DEPLOY_DB_NAME DEPLOY_DB_HOST
 
-spawn $script
+echo "🚀 Connecting to $DEPLOY_USER@$DEPLOY_HOST ..."
+
+# Run expect inline — uses exported env vars via $env()
+expect << EOF
+set timeout 300
+set host   "\$env(DEPLOY_HOST)"
+set user   "\$env(DEPLOY_USER)"
+set pass   "\$env(DEPLOY_PASSWORD)"
+
+spawn bash deploy.sh
 
 expect {
     "Are you sure you want to continue connecting" {
         send "yes\r"
         exp_continue
     }
-    "password:" {
-        send "$password\r"
+    -re {[Pp]assword:} {
+        send "\$pass\r"
         exp_continue
     }
     eof

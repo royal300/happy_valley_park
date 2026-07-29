@@ -38,6 +38,7 @@ const TicketManager = () => {
             discount: ticket.discount || '',
             color: ticket.color || 'from-blue-500 to-blue-700',
             link: ticket.link || 'https://happyvalley.royal300.com/client/book',
+            is_available: ticket.is_available !== undefined ? Number(ticket.is_available) : 1,
         });
     };
 
@@ -51,6 +52,7 @@ const TicketManager = () => {
             discount: '',
             color: 'from-blue-500 to-blue-700',
             link: 'https://happyvalley.royal300.com/client/book',
+            is_available: 1,
         });
     };
 
@@ -79,6 +81,28 @@ const TicketManager = () => {
         } catch (error) {
             const errMsg = error.response?.data?.error || 'Failed to save changes';
             setMessage('❌ ' + errMsg);
+        }
+    };
+
+    const handleToggleAvailability = async (ticket) => {
+        const currentVal = ticket.is_available !== undefined ? Number(ticket.is_available) : 1;
+        const newVal = currentVal === 1 ? 0 : 1;
+
+        // Optimistic UI update
+        setTickets(tickets.map(t => t.id === ticket.id ? { ...t, is_available: newVal } : t));
+
+        try {
+            const response = await axios.post(apiUrl, {
+                action: 'toggle_availability',
+                id: ticket.id,
+                is_available: newVal
+            });
+            if (!response.data.success) {
+                fetchTickets();
+            }
+        } catch (error) {
+            setMessage('❌ Failed to update status');
+            fetchTickets();
         }
     };
 
@@ -164,6 +188,21 @@ const TicketManager = () => {
                                 <option value="from-yellow-500 to-orange-600">Gold</option>
                             </select>
                         </div>
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-600 mb-1">Availability Status</label>
+                            <button
+                                type="button"
+                                onClick={() => setEditForm({ ...editForm, is_available: editForm.is_available === 1 ? 0 : 1 })}
+                                className={`w-full py-2 px-4 rounded font-bold transition-colors flex items-center justify-center gap-2 ${
+                                    editForm.is_available === 1
+                                        ? 'bg-green-100 text-green-700 border border-green-300 hover:bg-green-200'
+                                        : 'bg-red-100 text-red-700 border border-red-300 hover:bg-red-200'
+                                }`}
+                            >
+                                <span className={`w-3 h-3 rounded-full ${editForm.is_available === 1 ? 'bg-green-600' : 'bg-red-600'}`}></span>
+                                {editForm.is_available === 1 ? 'Available (Book Now Active)' : 'Not Available (Book Now Disabled)'}
+                            </button>
+                        </div>
                         <div className="col-span-1 md:col-span-2 flex justify-end gap-3 mt-4">
                             <button type="button" onClick={handleCancel} className="px-4 py-2 text-gray-600 font-bold border rounded hover:bg-gray-100 flex items-center gap-2">
                                 <X size={18} /> Cancel
@@ -182,29 +221,44 @@ const TicketManager = () => {
 
             {/* List */}
             <div className="space-y-3">
-                {tickets.map((ticket, index) => (
-                    <div key={ticket.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow border border-gray-100">
-                        <div className="flex items-center gap-4">
-                            <div className="flex flex-col gap-1">
-                                <button disabled={index === 0} onClick={() => handleMove(index, 'up')} className="text-gray-400 hover:text-blue-600 disabled:opacity-30"><ArrowUp size={20} /></button>
-                                <button disabled={index === tickets.length - 1} onClick={() => handleMove(index, 'down')} className="text-gray-400 hover:text-blue-600 disabled:opacity-30"><ArrowDown size={20} /></button>
+                {tickets.map((ticket, index) => {
+                    const isAvailable = (ticket.is_available !== undefined ? Number(ticket.is_available) : 1) === 1;
+                    return (
+                        <div key={ticket.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow border border-gray-100">
+                            <div className="flex items-center gap-4">
+                                <div className="flex flex-col gap-1">
+                                    <button disabled={index === 0} onClick={() => handleMove(index, 'up')} className="text-gray-400 hover:text-blue-600 disabled:opacity-30"><ArrowUp size={20} /></button>
+                                    <button disabled={index === tickets.length - 1} onClick={() => handleMove(index, 'down')} className="text-gray-400 hover:text-blue-600 disabled:opacity-30"><ArrowDown size={20} /></button>
+                                </div>
+                                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${ticket.color}`}></div>
+                                <div>
+                                    <h4 className="font-bold text-lg text-gray-900">{ticket.name}</h4>
+                                    <p className="text-sm text-gray-500">
+                                        {ticket.description} • <span className="font-semibold text-green-600">{ticket.price}</span>
+                                        {ticket.original_price && <span className="ml-2 line-through text-gray-400">{ticket.original_price}</span>}
+                                        {ticket.discount && <span className="ml-2 text-red-500 font-bold">{ticket.discount}</span>}
+                                    </p>
+                                </div>
                             </div>
-                            <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${ticket.color}`}></div>
-                            <div>
-                                <h4 className="font-bold text-lg text-gray-900">{ticket.name}</h4>
-                                <p className="text-sm text-gray-500">
-                                    {ticket.description} • <span className="font-semibold text-green-600">{ticket.price}</span>
-                                    {ticket.original_price && <span className="ml-2 line-through text-gray-400">{ticket.original_price}</span>}
-                                    {ticket.discount && <span className="ml-2 text-red-500 font-bold">{ticket.discount}</span>}
-                                </p>
+                            <div className="flex items-center gap-3">
+                                <button
+                                    onClick={() => handleToggleAvailability(ticket)}
+                                    className={`px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer border ${
+                                        isAvailable
+                                            ? 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
+                                            : 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100'
+                                    }`}
+                                    title="Click to toggle availability"
+                                >
+                                    <span className={`w-2 h-2 rounded-full ${isAvailable ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                                    {isAvailable ? 'Available' : 'Not Available'}
+                                </button>
+                                <button onClick={() => handleEditClick(ticket)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-full" title="Edit"><Pencil size={20} /></button>
+                                <button onClick={() => handleDelete(ticket.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-full" title="Delete"><Trash2 size={20} /></button>
                             </div>
                         </div>
-                        <div className="flex gap-2">
-                            <button onClick={() => handleEditClick(ticket)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-full" title="Edit"><Pencil size={20} /></button>
-                            <button onClick={() => handleDelete(ticket.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-full" title="Delete"><Trash2 size={20} /></button>
-                        </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
             {tickets.length === 0 && <p className="text-gray-500 italic">No ticket packages found.</p>}
         </div>
