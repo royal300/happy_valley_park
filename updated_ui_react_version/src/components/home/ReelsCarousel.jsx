@@ -6,6 +6,7 @@ import reel2 from '../../assets/videos/hvp_reels2.mp4';
 import reel3 from '../../assets/videos/hvp_reels3.mp4';
 import reel4 from '../../assets/videos/hvp_reels4.mp4';
 import reel5 from '../../assets/videos/hvp_reels5.mp4';
+import reel6 from '../../assets/videos/hvp_reels6.mp4';
 
 // Mock Data for Reels
 const reels = [
@@ -14,6 +15,7 @@ const reels = [
     { id: 3, video: reel3 },
     { id: 4, video: reel4 },
     { id: 5, video: reel5 },
+    { id: 6, video: reel6 },
 ];
 
 const LazyVideo = ({ src, poster }) => {
