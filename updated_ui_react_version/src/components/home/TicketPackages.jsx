@@ -174,10 +174,12 @@ const TicketPackages = () => {
                                     )}
 
                                     {!isAvailable && (
-                                        <div className="absolute top-3 right-3 z-20">
-                                            <span className="bg-red-600 text-white text-xs font-black px-3 py-1 rounded-full shadow-lg border border-white/20">
-                                                NOT AVAILABLE
-                                            </span>
+                                        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 pointer-events-none">
+                                            <img
+                                                src="/NA.png"
+                                                alt="Not Available"
+                                                className="w-14 sm:w-16 md:w-18 h-auto transform rotate-12 drop-shadow-2xl"
+                                            />
                                         </div>
                                     )}
 
