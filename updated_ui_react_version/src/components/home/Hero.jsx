@@ -135,26 +135,33 @@ const Hero = () => {
                     >
                         <a
                             href="https://booking.gohappyvalley.com/client/dashboard"
-                            className="bg-wonderla-yellow text-black font-extrabold px-10 py-4 rounded-full text-base sm:text-lg flex items-center gap-3 hover:bg-yellow-400 transition-all relative overflow-hidden"
-                            style={{
-                                boxShadow: '0 0 30px rgba(251, 189, 8, 0.6), 0 0 60px rgba(251, 189, 8, 0.4), 0 0 80px rgba(255, 255, 255, 0.4), 0 0 100px rgba(255, 255, 255, 0.2), 0 4px 20px rgba(0,0,0,0.3)',
-                            }}
+                            className="relative group inline-flex items-center gap-3.5 px-9 py-4 rounded-full font-black text-base sm:text-lg text-white uppercase tracking-wider transition-all duration-300 overflow-hidden border-2 border-white/60 bg-gradient-to-r from-yellow-400/30 via-amber-500/25 to-orange-500/30 hover:from-yellow-400/50 hover:via-amber-500/45 hover:to-orange-500/50 backdrop-blur-xl backdrop-saturate-150 shadow-[0_8px_32px_0_rgba(251,189,8,0.4)] hover:shadow-[0_12px_40px_0_rgba(251,189,8,0.65)] hover:border-white/90"
                         >
+                            {/* Inner Glass Glow */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/10 opacity-70 group-hover:opacity-100 transition-opacity"></div>
+
                             {/* Animated shine effect */}
                             <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
                                 animate={{
                                     x: ['-100%', '200%']
                                 }}
                                 transition={{
-                                    duration: 2,
+                                    duration: 2.2,
                                     repeat: Infinity,
                                     repeatDelay: 1,
                                     ease: "easeInOut"
                                 }}
                             />
-                            <img src={ticketIcon} alt="Ticket" className="w-6 h-6 sm:w-7 sm:h-7 relative z-10" />
-                            <span className="relative z-10">BOOK YOUR TICKETS</span>
+
+                            <img
+                                src={ticketIcon}
+                                alt="Ticket"
+                                className="w-7 h-7 sm:w-8 sm:h-8 relative z-10 filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] group-hover:rotate-12 transition-transform duration-300"
+                            />
+                            <span className="relative z-10 text-white font-extrabold tracking-widest drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] group-hover:text-yellow-200 transition-colors">
+                                BOOK YOUR TICKETS
+                            </span>
                         </a>
                     </motion.div>
                 </motion.div>
