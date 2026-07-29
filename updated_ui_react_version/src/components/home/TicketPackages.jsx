@@ -8,6 +8,7 @@ import waterParkImg from '../../assets/images/water_park.png';
 import dryParkImg from '../../assets/images/dry_park.png';
 import comboParkImg from '../../assets/images/combo_park.png';
 import entryTicketImg from '../../assets/images/entry_ticket.png';
+import naBadge from '../../assets/images/NA.png';
 
 const defaultPackages = [
     {
@@ -176,7 +177,7 @@ const TicketPackages = () => {
                                     {!isAvailable && (
                                         <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 pointer-events-none">
                                             <img
-                                                src="/NA.png"
+                                                src={naBadge}
                                                 alt="Not Available"
                                                 className="w-14 sm:w-16 md:w-18 h-auto transform rotate-12 drop-shadow-2xl"
                                             />
